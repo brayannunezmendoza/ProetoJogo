@@ -1,18 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package jogo;
+//jogador/personagem
 
-/**
- *
- * @author braya
- */
 public class Jogador {
-    int vida;
-    int tamanhoPulo;
-    String nome;
+
+    //atributos do personagem
+    private int vida;
+    private double tamanhoPulo;
+    private String nome;
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    public double getTamanhoPulo() {
+        return tamanhoPulo;
+    }
+
+    public void setTamanhoPulo(double tamanhoPulo) {
+        this.tamanhoPulo = tamanhoPulo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    //metodos do personagem
+    ///
+    ///mover(pular,andar)
+    ///alteração nos pontos de vida
+    ///sistema de dano(dar dano padrao e ter chance de critico com o random)
     
     
     
+
 }
