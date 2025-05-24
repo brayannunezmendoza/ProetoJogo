@@ -1,44 +1,57 @@
 package jogo;
 //jogador/personagem
 
+import java.util.Scanner;
+import javax.swing.text.Position;
+
 public class Jogador {
 
     //atributos do personagem
+    private int positionx, positiony ;
+    
     private int vida;
     private double tamanhoPulo;
     private String nome;
 
-    public int getVida() {
-        return vida;
-    }
-
-    public void setVida(int vida) {
-        this.vida = vida;
-    }
-
-    public double getTamanhoPulo() {
-        return tamanhoPulo;
-    }
-
-    public void setTamanhoPulo(double tamanhoPulo) {
-        this.tamanhoPulo = tamanhoPulo;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
+  
     //metodos do personagem
     ///
-    ///mover(pular,andar)
+    ///mover(pular,andar)-------------------
     ///alteração nos pontos de vida
     ///sistema de dano(dar dano padrao e ter chance de critico com o random)
     
-    
-    
+     private int x; // Coordenada X
+    private int y; // Coordenada Y
 
-}
+    // Construtor para definir posição inicial
+    public Jogador(int xInicial, int yInicial) {
+        this.x = xInicial;
+        this.y = yInicial;
+    }
+
+    // Métodos para movimentação
+    public void moverCima(int distancia) {
+        y += distancia;
+    }
+
+    public void moverBaixo(int distancia) {
+        y -= distancia;
+    }
+
+    public void moverEsquerda(int distancia) {
+        x -= distancia;
+    }
+
+    public void moverDireita(int distancia) {
+        x += distancia;
+    }
+
+    // Método para mostrar posição atual
+    public void mostrarPosicao() {
+        System.out.println("Posição atual: (" + x + ", " + y + ")");
+    }
+
+
+    }
+
+
