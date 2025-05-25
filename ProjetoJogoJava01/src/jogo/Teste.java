@@ -2,7 +2,7 @@ package jogo;
 
 import javax.swing.*;
 import java.awt.*;
-import Login.Login;
+import Login.*;
 import View.Jogo;
 import View.Jogo;
 
