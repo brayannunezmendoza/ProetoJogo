@@ -2,7 +2,11 @@ package meuJogoModelo;
 
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class Jogador {
 
@@ -17,16 +21,20 @@ public class Jogador {
 
     //posição do boneco
     public Jogador() {
-        this.x = 500;
-        this.y = 200;
+    
+        this.x = y;
+        this.y = y;
         System.out.println("posição inicia" + x + y);
+    
+    
     }
 
+    //Carega o boneco
     public void load() {
         ImageIcon referencia = new ImageIcon(getClass().getResource("/jogoImagem/Prancheta 1.png"));
         imagem = referencia.getImage();
-        altura = imagem.getHeight(null);
-        largura = imagem.getWidth(null);
+        altura = imagem.getHeight(null);//Altura 
+        largura = imagem.getWidth(null);//Largura
         System.out.println("boneco carregado");
 
     }
@@ -36,39 +44,21 @@ public class Jogador {
         x += dx;
         y += dy;
         //System.out.println("update");
-
+        //dx = 1;
+        System.out.println(dx);
+        
+        
+        
+        
     }
+//entrada do teclado  JFrame frame = new JFrame("Captura de Teclas");
+    
 
-    //entrada do teclado 
-    public void KeyPressed(KeyEvent seta) {
-        int codigo = seta.getKeyCode();    //recebe o comando das setas
-        if (codigo == KeyEvent.VK_UP) {
-            dy = -30;
-        } else if (codigo == KeyEvent.VK_DOWN) {
-            dy = 30;
-        } else if (codigo == KeyEvent.VK_LEFT) {
-            dx = - 30;
-        } else if (codigo == KeyEvent.VK_RIGHT) {
-            dx = 30;
-        }
-    }
+   
+   
 
-    public void KeyReleased(KeyEvent seta) {
-        int codigo = seta.getKeyCode();    //recebe o comando das setas
-        if (codigo == KeyEvent.VK_UP) {
-            dy = 0;
-        } else if (codigo == KeyEvent.VK_DOWN) {
-            dy = 0;
-        } else if (codigo == KeyEvent.VK_LEFT) {
-            dx = 0;
-        } else if (codigo == KeyEvent.VK_RIGHT) {
-            dx = 0;
-        }
-    }
 
-    public void KeyTyped(KeyEvent seta) {
-    }
-
+   
     public int getX() {
         return x;
     }
@@ -93,4 +83,31 @@ public class Jogador {
         this.imagem = imagem;
     }
 
+    public static void main(String[] args) {
+         JFrame frame = new JFrame("Captura de Teclas");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JLabel label = new JLabel("Pressione uma tecla", SwingConstants.CENTER);
+        frame.add(label);
+
+        frame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                System.out.println(e);
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                label.setText("Tecla liberada: " + KeyEvent.getKeyText(e.getKeyCode()));
+            }
+
+            @Override
+            public void keyTyped(KeyEvent e) {
+                // Captura o caractere digitado
+            }
+        });
+
+        frame.setVisible(true);
+    }
 }
