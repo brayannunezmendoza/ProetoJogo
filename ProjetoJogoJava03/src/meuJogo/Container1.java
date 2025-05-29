@@ -28,6 +28,15 @@ public class Container1 extends JFrame { //classe recebe tudo do JFrame
     public static void main(String[] args) {
         new Container1();
         new Fase1();
+        
+        
+        
+        
+        ////////////////TESTEANDO
+        
+        
+        
+        
     }
 
 }
