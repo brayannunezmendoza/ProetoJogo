@@ -4,6 +4,7 @@
  */
 package niveis;
 
+import Elementos.Personagem;
 import java.awt.event.KeyEvent;
 
 /**
@@ -12,7 +13,7 @@ import java.awt.event.KeyEvent;
  */
 public class Nivel_1 extends javax.swing.JFrame {
 
-    int x=10,y=20;
+    int x=1,y=700;
     
     /**
      * Creates new form Nivel_1
@@ -90,9 +91,20 @@ public class Nivel_1 extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
+        /*
+        int tecla = evt.getKeyCode();
+        if (tecla == KeyEvent.VK_LEFT) {
+           x = x - 20;
+        }
+        if (tecla == KeyEvent.VK_RIGHT) {
+            x = x + 10;
+        }
         
+        if (tecla == KeyEvent.VK_DOWN) {
+            y = y + 20;
+        }
+        */
         
-        x=x+10;
         lbl_boneco.setLocation(x, y);
         System.out.println("pressionado");
     }//GEN-LAST:event_formKeyPressed
@@ -129,7 +141,8 @@ public class Nivel_1 extends javax.swing.JFrame {
             public void run() {
                 new Nivel_1().setVisible(true);
             }
-        });
+        }); 
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
