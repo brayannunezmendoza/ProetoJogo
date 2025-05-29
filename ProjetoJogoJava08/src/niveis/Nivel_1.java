@@ -12,8 +12,9 @@ import java.awt.event.KeyEvent;
  */
 public class Nivel_1 extends javax.swing.JFrame {
 
-    int x=10,y=20;
-    
+    int x = 100, y = 200;
+    int dx, dy;
+
     /**
      * Creates new form Nivel_1
      */
@@ -83,18 +84,30 @@ public class Nivel_1 extends javax.swing.JFrame {
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         System.out.println("fundo clicado");
-         //y=y+1;
-         lbl_boneco.setLocation(x, y);
+        //y=y+1;
+
         // TODO add your handling code here:
     }//GEN-LAST:event_formKeyReleased
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
-        
-        
-        x=x+10;
+        int tecla = evt.getKeyCode();
+        if (tecla == KeyEvent.VK_LEFT) {
+            System.out.println("left");
+        }
+        if (tecla == KeyEvent.VK_RIGHT) {
+            x = y + 20;
+        }
+        if (tecla == KeyEvent.VK_UP) {
+            y = y - 20;
+        }
+        if (tecla == KeyEvent.VK_DOWN) {
+            y = y + 20;
+        }
+
+        /*x=x+10;
         lbl_boneco.setLocation(x, y);
-        System.out.println("pressionado");
+        System.out.println("pressionado");*/
     }//GEN-LAST:event_formKeyPressed
 
     /**
