@@ -4,7 +4,6 @@
  */
 package login;
 import javax.swing.*;
-import niveis.Nivel_1;
 
 
 
@@ -16,7 +15,6 @@ public class teste extends JFrame{
     public teste(){
         setSize(1280,720);
         setVisible(true);
-        add(new Nivel_1());
         
     }
     
