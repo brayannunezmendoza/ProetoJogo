@@ -1,21 +1,24 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package niveis;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
- * @author braya
+ * @author 12525153326
  */
-public class Nivel_1 extends javax.swing.JPanel {
+public class Nivel_1 extends javax.swing.JFrame {
 
+    int x=10,y=20;
+    
     /**
      * Creates new form Nivel_1
      */
     public Nivel_1() {
         initComponents();
-        setVisible(true);
     }
 
     /**
@@ -27,30 +30,109 @@ public class Nivel_1 extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lbl_boneco = new javax.swing.JLabel();
 
-        jLabel1.setText("Teste");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        lbl_boneco.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/boneco.png"))); // NOI18N
+        lbl_boneco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lbl_bonecoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                lbl_bonecoKeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(405, 405, 405)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(708, Short.MAX_VALUE))
+                .addGap(420, 420, 420)
+                .addComponent(lbl_boneco, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(787, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(639, Short.MAX_VALUE))
+                .addGap(234, 234, 234)
+                .addComponent(lbl_boneco, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(387, Short.MAX_VALUE))
         );
+
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lbl_bonecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbl_bonecoKeyPressed
+        System.out.println("andasaaaaaaaaaaaaaaa");        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_bonecoKeyPressed
+
+    private void lbl_bonecoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lbl_bonecoKeyReleased
+        System.out.println("clicado");
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lbl_bonecoKeyReleased
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        System.out.println("fundo clicado");
+         //y=y+1;
+         lbl_boneco.setLocation(x, y);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyReleased
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        // TODO add your handling code here:
+        
+        
+        x=x+10;
+        lbl_boneco.setLocation(x, y);
+        System.out.println("pressionado");
+    }//GEN-LAST:event_formKeyPressed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Nivel_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Nivel_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Nivel_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Nivel_1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Nivel_1().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbl_boneco;
     // End of variables declaration//GEN-END:variables
 }
