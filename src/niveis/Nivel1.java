@@ -12,10 +12,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 public class Nivel1 extends JFrame implements KeyListener {
-
+    
     //atributos 
     private JFrame tela_nivel1;
     private ImageIcon fundo_imagem;
@@ -42,6 +43,7 @@ public class Nivel1 extends JFrame implements KeyListener {
     private boolean isJumping = false;
     private int fy = 800;
     private boolean nochao = false;
+
 
     public Nivel1() {
         {
@@ -164,6 +166,8 @@ public class Nivel1 extends JFrame implements KeyListener {
         tela_nivel1.setVisible(true);
         tela_nivel1.addKeyListener(new KeyAdapter() {
             //movimentação
+
+            //teclado pressioando a d space
             @Override
             public void keyPressed(KeyEvent e) {
                 int tecla = e.getKeyCode();
@@ -186,10 +190,12 @@ public class Nivel1 extends JFrame implements KeyListener {
                 }
             }
 
+            //click do mouse
             public void mouseClicked() {
 
             }
 
+            //teclado a d space
             @Override
             public void keyReleased(KeyEvent e) {
                 tecla = e.getKeyCode();
@@ -216,6 +222,7 @@ public class Nivel1 extends JFrame implements KeyListener {
 
     }
 
+    //metodo que é responsavel pelas morte
     public void mortes() {
         if (lbl_boneco.getBounds().intersects(lbl_barreira.getBounds())) {
             contadorMortes++;
@@ -231,20 +238,20 @@ public class Nivel1 extends JFrame implements KeyListener {
             y = 750;
             lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
         }
-       if (lbl_boneco.getBounds().intersects(lbl_derrota.getBounds())) {
+        if (lbl_boneco.getBounds().intersects(lbl_derrota.getBounds())) {
             contadorMortes++;
 
             x = 100;
             y = 750;
             lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
-            
+
             lbl_derrota.setBackground(Color.red);
             lbl_plataformaWind.setBackground(Color.green);
         }
-        
+
     }
 
-    public void p1() {
+    public void colisao() {
 
         if (lbl_boneco.getBounds().intersects(lbl_prataforma1.getBounds())) {
             dy = lbl_prataforma1.getY();
@@ -299,9 +306,6 @@ public class Nivel1 extends JFrame implements KeyListener {
             fy = lbl_prataforma6.getY() - 40;
             x = x + dx;
 
-        } else if (lbl_boneco.getBounds().intersects(lbl_plataformaWind.getBounds())) {
-            JOptionPane.showMessageDialog(null, "VICTORY");
-
         } else {
             isJumping = true;
             fy = 850;
@@ -309,7 +313,25 @@ public class Nivel1 extends JFrame implements KeyListener {
 
     }
 
-    public void andar() {
+    public void ganhou() {
+        if (lbl_boneco.getBounds().intersects(lbl_plataformaWind.getBounds())) {
+            JOptionPane.showMessageDialog(null, "VICTORY");
+            x = 100;
+            y = 720;
+
+            boolean win = false;
+            win = true;
+            if (win) {
+
+                //tela_nivel1.dispose();
+                //win = false;
+                tela_nivel1.dispatchEvent(new WindowEvent(tela_nivel1, WindowEvent.WINDOW_CLOSING));
+
+            }
+        }
+    }
+
+    public void pular() {
         ////pulo
         if (isJumping) {
             y -= velocity;
@@ -325,8 +347,9 @@ public class Nivel1 extends JFrame implements KeyListener {
 
     public void update() {
         mortes();
-        p1();
-        andar();
+        colisao();
+        pular();
+        ganhou();
 
         lbl_boneco.setLocation(x, y);
         repaint();

@@ -11,27 +11,30 @@ import javax.swing.JPanel;
 
 public class Jogador extends JFrame implements KeyListener {
 
-   
-
     private int vida;
-private JPanel p;
+    private JLabel lbl_boneco;
+    ImageIcon ImagemBoneco;
+    private int x=100,y=600;
+
     public Jogador() {
-       //ImageIcon ImagemBoneco = new ImageIcon(getClass().getResource("/IMG/boneco.png"));
-       // lbl_boneco.setIcon(ImagemBoneco);
-        
-    
-        /* lbl_boneco.setIcon(ImagemBoneco);
-        lbl_boneco.setBackground(Color.red);
-        lbl_boneco.setOpaque(true);
-        lbl_boneco.setBounds(200, 200, 60, 60);
-        lbl_boneco.setVisible(true);*/
-        
-        System.out.println("importado");
-        
+       
+         
+         
+         
+       
+
     }
-
+    
+    
+    
+    
    
+    
 
+    
+    
+    
+    
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -46,9 +49,5 @@ private JPanel p;
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-   
-    
-    
-        
 
 }

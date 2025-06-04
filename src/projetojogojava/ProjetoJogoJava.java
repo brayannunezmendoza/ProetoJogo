@@ -7,6 +7,7 @@ import niveis.SelecionarNiveis;
 import niveis.Nivel1;
 import acessoSistem.Entrar;
 import niveis.Nivel2;
+import niveis.Nivel3;
 
 public class ProjetoJogoJava {
 
@@ -17,7 +18,8 @@ public class ProjetoJogoJava {
        // SelecionarNiveis s =  new SelecionarNiveis();
          //Nivel1 n1 = new Nivel1();
          //Entrar e = new Entrar();
-         Nivel2 n2 = new Nivel2();
+         //Nivel2 n2 = new Nivel2();
+         Nivel3 n3 = new Nivel3();
          
     }
 
