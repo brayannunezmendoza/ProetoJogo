@@ -1,6 +1,7 @@
 package niveis;
 
 import java.awt.Color;
+import java.awt.Font;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
 
 public class Nivel1 extends JFrame implements KeyListener {
 
@@ -29,6 +31,13 @@ public class Nivel1 extends JFrame implements KeyListener {
     private JLabel lbl_prataforma4;
     private JLabel lbl_prataforma5;
     private JLabel lbl_prataforma6;
+    private JLabel lbl_plataformaWind;
+    private JLabel lbl_obstaculo;
+    private JLabel lbl_derrota;
+    private JLabel lbl_indicadorMortes;
+    private JLabel lbl_barreira;
+    private int contadorMortes;
+
     private int velocity;
     private boolean isJumping = false;
     private int fy = 800;
@@ -48,6 +57,11 @@ public class Nivel1 extends JFrame implements KeyListener {
             lbl_prataforma4 = new JLabel();
             lbl_prataforma5 = new JLabel();
             lbl_prataforma6 = new JLabel();
+            lbl_plataformaWind = new JLabel();
+            lbl_obstaculo = new JLabel();
+            lbl_derrota = new JLabel();
+            lbl_barreira = new JLabel();
+            lbl_indicadorMortes = new JLabel();
 
             //configurações da janela
             tela_nivel1.setSize(1600, 900);
@@ -60,50 +74,79 @@ public class Nivel1 extends JFrame implements KeyListener {
             //configurando boneco
             lbl_boneco.setIcon(imgboneco);
             lbl_boneco.setBackground(Color.red);
-            lbl_boneco.setOpaque(false);
-            lbl_boneco.setBounds(x, y, 60, 60);
-            lbl_boneco.setSize(60, 60);
+            lbl_boneco.setOpaque(true);
+            lbl_boneco.setBounds(x, y, 50, 60);
+            lbl_boneco.setSize(53, 53);
             lbl_boneco.setVisible(true);
             tela_nivel1.add(lbl_boneco);
 
-            //configuração da plataforma
+            //configuração da plataforma4
             lbl_prataforma1.setBackground(Color.getHSBColor(30, 100, 58));
             lbl_prataforma1.setOpaque(true);
-            lbl_prataforma1.setBounds(130, 750, 500, 40);
+            lbl_prataforma1.setBounds(10, 800, 400, 40);
             lbl_prataforma1.setVisible(true);
             tela_nivel1.add(lbl_prataforma1);
 
             //plataforma 2
             lbl_prataforma2.setBackground(Color.getHSBColor(30, 100, 58));
             lbl_prataforma2.setOpaque(true);
-            lbl_prataforma2.setBounds(1100, 600, 200, 40);
+            lbl_prataforma2.setBounds(800, 650, 150, 40);
             lbl_prataforma2.setVisible(true);
             tela_nivel1.add(lbl_prataforma2);
             //plataforma 3
             lbl_prataforma3.setBackground(Color.getHSBColor(30, 100, 58));
             lbl_prataforma3.setOpaque(true);
-            lbl_prataforma3.setBounds(10, 100, 150, 40);
+            lbl_prataforma3.setBounds(500, 150, 150, 40);
             lbl_prataforma3.setVisible(true);
             tela_nivel1.add(lbl_prataforma3);
             //plataforma 4
             lbl_prataforma4.setBackground(Color.getHSBColor(30, 100, 58));
             lbl_prataforma4.setOpaque(true);
-            lbl_prataforma4.setBounds(800, 400, 10, 40);
+            lbl_prataforma4.setBounds(500, 450, 10, 40);
             lbl_prataforma4.setVisible(true);
             tela_nivel1.add(lbl_prataforma4);
             //plataforma 5
             lbl_prataforma5.setBackground(Color.getHSBColor(30, 100, 58));
             lbl_prataforma5.setOpaque(true);
-            lbl_prataforma5.setBounds(400, 300, 100, 40);
+            lbl_prataforma5.setBounds(200, 350, 100, 40);
             lbl_prataforma5.setVisible(true);
             tela_nivel1.add(lbl_prataforma5);
             //plataforma 6
             lbl_prataforma6.setBackground(Color.getHSBColor(30, 100, 58));
             lbl_prataforma6.setOpaque(true);
-            lbl_prataforma6.setBounds(1300, 250, 300, 40);
+            lbl_prataforma6.setBounds(1300, 300, 200, 40);
             lbl_prataforma6.setVisible(true);
             tela_nivel1.add(lbl_prataforma6);
-
+            //plataforma win
+            lbl_plataformaWind.setBackground(Color.RED);
+            lbl_plataformaWind.setOpaque(true);
+            lbl_plataformaWind.setBounds(1530, 815, 50, 50);
+            lbl_plataformaWind.setVisible(true);
+            tela_nivel1.add(lbl_plataformaWind);
+            //platataforma obstaculo
+            lbl_obstaculo.setBackground(Color.BLACK);
+            lbl_obstaculo.setOpaque(true);
+            lbl_obstaculo.setBounds(1400, 400, 30, 300);
+            lbl_obstaculo.setVisible(true);
+            tela_nivel1.add(lbl_obstaculo);
+            //plataforma lost
+            lbl_derrota.setBackground(Color.GREEN);
+            lbl_derrota.setOpaque(true);
+            lbl_derrota.setBounds(100, 50, 30, 30);
+            lbl_derrota.setVisible(true);
+            tela_nivel1.add(lbl_derrota);
+            //indicador de mortes          
+            lbl_indicadorMortes.setBounds(1300, 50, 250, 100);
+            lbl_indicadorMortes.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 30));
+            lbl_indicadorMortes.setForeground(Color.white);
+            lbl_indicadorMortes.setVisible(true);
+            tela_nivel1.add(lbl_indicadorMortes);
+            //configuração da plataforma 
+            lbl_barreira.setBackground(Color.getHSBColor(30, 100, 58));
+            lbl_barreira.setOpaque(false);
+            lbl_barreira.setBounds(-1000, 850, 4500, 10);
+            lbl_barreira.setVisible(true);
+            tela_nivel1.add(lbl_barreira);
             //fundo
             lbl_fundo.setIcon(fundo_imagem);
             lbl_fundo.setBounds(0, 0, 1600, 900);
@@ -173,6 +216,34 @@ public class Nivel1 extends JFrame implements KeyListener {
 
     }
 
+    public void mortes() {
+        if (lbl_boneco.getBounds().intersects(lbl_barreira.getBounds())) {
+            contadorMortes++;
+
+            x = 100;
+            y = 750;
+            lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
+        }
+        if (lbl_boneco.getBounds().intersects(lbl_obstaculo.getBounds())) {
+            contadorMortes++;
+
+            x = 100;
+            y = 750;
+            lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
+        }
+       if (lbl_boneco.getBounds().intersects(lbl_derrota.getBounds())) {
+            contadorMortes++;
+
+            x = 100;
+            y = 750;
+            lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
+            
+            lbl_derrota.setBackground(Color.red);
+            lbl_plataformaWind.setBackground(Color.green);
+        }
+        
+    }
+
     public void p1() {
 
         if (lbl_boneco.getBounds().intersects(lbl_prataforma1.getBounds())) {
@@ -191,8 +262,6 @@ public class Nivel1 extends JFrame implements KeyListener {
 
             fy = lbl_prataforma2.getY() - 40;
             x = x + dx;
-                        
-                      
 
         } else if (lbl_boneco.getBounds().intersects(lbl_prataforma3.getBounds())) {
 
@@ -203,7 +272,7 @@ public class Nivel1 extends JFrame implements KeyListener {
             fy = lbl_prataforma3.getY() - 40;
             x = x + dx;
 
-        }else if (lbl_boneco.getBounds().intersects(lbl_prataforma4.getBounds())) {
+        } else if (lbl_boneco.getBounds().intersects(lbl_prataforma4.getBounds())) {
 
             dy = lbl_prataforma4.getY();
             lbl_boneco.setLocation(x, lbl_prataforma4.getY());
@@ -212,7 +281,7 @@ public class Nivel1 extends JFrame implements KeyListener {
             fy = lbl_prataforma4.getY() - 40;
             x = x + dx;
 
-        }  else if (lbl_boneco.getBounds().intersects(lbl_prataforma5.getBounds())) {
+        } else if (lbl_boneco.getBounds().intersects(lbl_prataforma5.getBounds())) {
 
             dy = lbl_prataforma5.getY();
             lbl_boneco.setLocation(x, lbl_prataforma5.getY());
@@ -230,10 +299,10 @@ public class Nivel1 extends JFrame implements KeyListener {
             fy = lbl_prataforma6.getY() - 40;
             x = x + dx;
 
-        } 
-        
-        
-        else {
+        } else if (lbl_boneco.getBounds().intersects(lbl_plataformaWind.getBounds())) {
+            JOptionPane.showMessageDialog(null, "VICTORY");
+
+        } else {
             isJumping = true;
             fy = 850;
         }
@@ -255,6 +324,7 @@ public class Nivel1 extends JFrame implements KeyListener {
     }
 
     public void update() {
+        mortes();
         p1();
         andar();
 

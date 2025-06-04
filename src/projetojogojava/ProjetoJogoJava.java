@@ -5,6 +5,8 @@ import container.Tela_escolhaAcesso;
 import acessoSistem.Cadastro;
 import niveis.SelecionarNiveis;
 import niveis.Nivel1;
+import acessoSistem.Entrar;
+import niveis.Nivel2;
 
 public class ProjetoJogoJava {
 
@@ -13,8 +15,10 @@ public class ProjetoJogoJava {
         //Tela_escolhaAcesso t = new Tela_escolhaAcesso();
         //Cadastro c = new Cadastro();
        // SelecionarNiveis s =  new SelecionarNiveis();
-         Nivel1 n1 = new Nivel1();
-    
+         //Nivel1 n1 = new Nivel1();
+         //Entrar e = new Entrar();
+         Nivel2 n2 = new Nivel2();
+         
     }
 
 }
