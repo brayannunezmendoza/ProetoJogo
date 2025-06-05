@@ -12,7 +12,8 @@ public class Nivel3 extends JFrame implements KeyListener {
     private ImageIcon img_fundo, img_player, img_nave;
     private JLabel lbl_fundo, lbl_player, lbl_nave,
             lbl_platadorma1, lbl_platadorma2, lbl_platadorma3;
-    private int px = 0, py = 700, dpx = 0, dpy = 0;
+    private JLabel guia1,guia2,guia3;
+    private int px = 0, py = 50, dpx = 0, dpy = 0;
     private JLabel lbl_obstaculo1, lbl_obstaculo2, lbl_obstaculo3;
     private int velocity;
     private boolean isJumping;
@@ -29,6 +30,7 @@ public class Nivel3 extends JFrame implements KeyListener {
         player();
         osBixin();
         obstaculos();
+        guia();
         plataformas();
         fundo();
         andar();
@@ -57,13 +59,24 @@ public class Nivel3 extends JFrame implements KeyListener {
 
     }
 
+    public void guia(){
+    guia1 = new JLabel();
+    guia1.setBounds(0, 50, 600, 1);
+    guia1.setBackground(Color.BLACK);
+    guia1.setOpaque(true);
+        guia1.setVisible(false);
+        container.add(guia1);
+    
+    
+    }
+    
     public void plataformas() {
         lbl_platadorma1 = new JLabel();
         lbl_platadorma2 = new JLabel();
         lbl_platadorma3 = new JLabel();
 
         lbl_platadorma1.setBounds(0, 100, 600, 20);
-        lbl_platadorma1.setBackground(Color.BLUE);
+        lbl_platadorma1.setBackground(Color.white);
         lbl_platadorma1.setOpaque(true);
         lbl_platadorma1.setVisible(true);
         container.add(lbl_platadorma1);
@@ -164,12 +177,33 @@ public class Nivel3 extends JFrame implements KeyListener {
 
     }
 
+    public void colizao() {
+        if (lbl_player.getBounds().intersects(guia1.getBounds())) {
+            System.out.println("encostou");
+            dpy = guia1.getY();
+            // System.out.println("encostou");
+
+            fy =guia1.getY()-10 ;
+            lbl_player.setLocation(px, guia1.getY());
+            px = px + dpx;
+
+        } 
+        
+        
+        else {
+            isJumping = true;
+            fy = 900;
+
+        }
+
+    }
+
     public void movimentacaoBixo() {
     }
+
     public void mortes() {
 
     }
-
 
     public void ganhou() {
     }
@@ -184,10 +218,13 @@ public class Nivel3 extends JFrame implements KeyListener {
             isJumping = false;
             velocity = 0;
         }
+
     }
 
     public void update() {
         pular();
+        colizao();
+
         px += dpx;
         lbl_player.setLocation(px, py);
         repaint();
