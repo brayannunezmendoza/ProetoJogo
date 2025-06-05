@@ -18,6 +18,7 @@ public class Nivel3 extends JFrame implements KeyListener {
     private int velocity;
     private boolean isJumping;
     private int fy = 900;
+    private int pgl =1200;
 
     public Nivel3() {
 
@@ -61,11 +62,23 @@ public class Nivel3 extends JFrame implements KeyListener {
 
     public void guia(){
     guia1 = new JLabel();
-    guia1.setBounds(0, 50, 600, 1);
+    guia1.setBounds(0, 150, pgl, 1);
     guia1.setBackground(Color.BLACK);
     guia1.setOpaque(true);
         guia1.setVisible(false);
         container.add(guia1);
+    guia2 = new JLabel();
+    guia2.setBounds(400, 390, pgl, 10);
+    guia2.setBackground(Color.BLACK);
+    guia2.setOpaque(true);
+        guia2.setVisible(false);
+        container.add(guia2);
+    guia3 = new JLabel();
+    guia3.setBounds(0, 590, pgl, 1);
+    guia3.setBackground(Color.BLACK);
+    guia3.setOpaque(true);
+        guia3.setVisible(true);
+        container.add(guia3);
     
     
     }
@@ -75,19 +88,19 @@ public class Nivel3 extends JFrame implements KeyListener {
         lbl_platadorma2 = new JLabel();
         lbl_platadorma3 = new JLabel();
 
-        lbl_platadorma1.setBounds(0, 100, 600, 20);
+        lbl_platadorma1.setBounds(0, 210, pgl, 10);
         lbl_platadorma1.setBackground(Color.white);
         lbl_platadorma1.setOpaque(true);
         lbl_platadorma1.setVisible(true);
         container.add(lbl_platadorma1);
 
-        lbl_platadorma2.setBounds(0, 300, 600, 20);
+        lbl_platadorma2.setBounds(400, 450, pgl, 10);
         lbl_platadorma2.setBackground(Color.BLUE);
         lbl_platadorma2.setOpaque(true);
         lbl_platadorma2.setVisible(true);
         container.add(lbl_platadorma2);
 
-        lbl_platadorma3.setBounds(0, 500, 600, 20);
+        lbl_platadorma3.setBounds(0, 650, pgl, 10);
         lbl_platadorma3.setBackground(Color.BLUE);
         lbl_platadorma3.setOpaque(true);
         lbl_platadorma3.setVisible(true);
@@ -187,6 +200,24 @@ public class Nivel3 extends JFrame implements KeyListener {
             lbl_player.setLocation(px, guia1.getY());
             px = px + dpx;
 
+        }  else if (lbl_player.getBounds().intersects(guia2.getBounds())) {
+            System.out.println("encostou");
+            dpy = guia2.getY();
+            // System.out.println("encostou");
+
+            fy =guia2.getY()-20 ;
+            lbl_player.setLocation(px, guia2.getY());
+            px = px + dpx;
+
+        } else if (lbl_player.getBounds().intersects(guia3.getBounds())) {
+            System.out.println("encostou");
+            dpy = guia3.getY();
+            // System.out.println("encostou");
+
+            fy =guia3.getY()-20 ;
+            lbl_player.setLocation(px, guia3.getY());
+            px = px + dpx;
+
         } 
         
         
@@ -210,7 +241,7 @@ public class Nivel3 extends JFrame implements KeyListener {
 
     public void pular() {
         if (isJumping) {
-            py -= velocity;
+            py -= velocity-5;
             velocity -= 1;
             px += dpx;
         }

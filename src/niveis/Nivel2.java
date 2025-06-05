@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -40,23 +41,27 @@ public class Nivel2 extends JFrame implements KeyListener {
     private JLabel lbl_barreira1;
     private JLabel lbl_plataforma2;
     private int contadorMortes;
-    
+    private JLabel bala;
+
     private int velocity;
     private boolean isJumping = false;
     private int fy = 800;
     private boolean nochao = false;
-    
+
     private JLabel bixo1;
     private JLabel bixo2;
     private int bx = 0, by = 553;
-    
+
     boolean movbic = true;
-    
+
     private int bx1 = 200;
     private int by1 = 300;
     boolean movbic1 = false;
-    
+    boolean b = true;
+    int pbx;
+
     public Nivel2() {
+
         {
             //instanciando objetos
             tela_nivel1 = new JFrame();
@@ -79,13 +84,14 @@ public class Nivel2 extends JFrame implements KeyListener {
             lbl_plataforma2 = new JLabel();
             bixo1 = new JLabel();
             bixo2 = new JLabel();
+            bala = new JLabel();
 
             //configurações da janela
             tela_nivel1.setSize(1600, 900);
             tela_nivel1.setDefaultCloseOperation(EXIT_ON_CLOSE);
             tela_nivel1.setResizable(false);
             tela_nivel1.setLocationRelativeTo(null);
-            
+
             new Timer(20, e -> update()).start();
 
             //configurando boneco
@@ -97,19 +103,25 @@ public class Nivel2 extends JFrame implements KeyListener {
             lbl_boneco.setVisible(true);
             tela_nivel1.add(lbl_boneco);
 
+            bala.setBounds(10, 10, 50, 50);
+            bala.setBackground(Color.red);
+            bala.setOpaque(true);
+            bala.setVisible(true);
+            tela_nivel1.add(bala);
+
             //configurando chao
             lbl_chao.setBackground(Color.GRAY);
             lbl_chao.setOpaque(true);
             lbl_chao.setBounds(-100, 800, 1800, 50);
             lbl_chao.setVisible(true);
             tela_nivel1.add(lbl_chao);
-            
+
             bixo1.setBackground(Color.PINK);
             bixo1.setOpaque(true);
             bixo1.setBounds(bx, by, 30, 30);
             bixo1.setVisible(true);
             tela_nivel1.add(bixo1);
-            
+
             bixo2.setBackground(Color.PINK);
             bixo2.setOpaque(true);
             bixo2.setBounds(bx1, by1, 30, 30);
@@ -189,10 +201,9 @@ public class Nivel2 extends JFrame implements KeyListener {
             lbl_fundo.setBounds(0, 0, 1600, 900);
             lbl_fundo.setVisible(true);
             tela_nivel1.add(lbl_fundo);
-            
-            
+
         }
-        
+
         tela_nivel1.setVisible(true);
         tela_nivel1.addKeyListener(new KeyAdapter() {
             //movimentação
@@ -200,7 +211,7 @@ public class Nivel2 extends JFrame implements KeyListener {
             @Override
             public void keyPressed(KeyEvent e) {
                 int tecla = e.getKeyCode();
-                
+
                 switch (tecla) {
                     //Direita
                     case KeyEvent.VK_D -> {
@@ -212,7 +223,7 @@ public class Nivel2 extends JFrame implements KeyListener {
                     //Esquerda
                     case KeyEvent.VK_A -> {
                         dx = -14;
-                       //System.out.println("a");
+                        //System.out.println("a");
                         x = x + dx;
                         lbl_boneco.setLocation(x, y);
                     }
@@ -225,13 +236,13 @@ public class Nivel2 extends JFrame implements KeyListener {
                 tecla = e.getKeyCode();
                 if (tecla == KeyEvent.VK_D || tecla == KeyEvent.VK_A) {
                     dx = 0;
-                    
+
                 }
 
                 //Pulo
                 if (isJumping == false) {
                     if (tecla == KeyEvent.VK_SPACE) {
-                       //System.out.println("pulou");
+                        //System.out.println("pulou");
                         isJumping = true;
                         velocity = 18;
                     }
@@ -239,11 +250,11 @@ public class Nivel2 extends JFrame implements KeyListener {
                 if (isJumping == true) {
                     //System.out.println("nao pula");
                 }
-                
+
             }
         }
         );
-        
+
     }
 
     //metodo que é responsavel pelas morte
@@ -279,7 +290,7 @@ public class Nivel2 extends JFrame implements KeyListener {
             lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
             bx = 0;
             movbic = true;
-            
+
         }
         if (lbl_boneco.getBounds().intersects(bixo2.getBounds())) {
             contadorMortes++;
@@ -288,71 +299,71 @@ public class Nivel2 extends JFrame implements KeyListener {
             lbl_indicadorMortes.setText("Mortes: " + contadorMortes);
             bx1 = 200;
             movbic = true;
-            
+
         }
-        
+
     }
-    
+
     public void colisao() {
-        
+
         if (lbl_boneco.getBounds().intersects(lbl_chao.getBounds())) {
             dy = lbl_chao.getY();
             lbl_boneco.setLocation(x, lbl_chao.getY());
-           // System.out.println("encostou");
-            
+            // System.out.println("encostou");
+
             fy = lbl_chao.getY() - 30;
-            
+
             x = x + dx;
-            
+
         } else if (lbl_boneco.getBounds().intersects(lbl_guia.getBounds())) {
-            
+
             dy = lbl_guia.getY();
             lbl_boneco.setLocation(x, lbl_guia.getY());
             //System.out.println("encostou");
-            
+
             fy = lbl_guia.getY() - 30;
             x = x + dx;
-            
+
         } else if (lbl_boneco.getBounds().intersects(lbl_escada.getBounds())) {
-            
+
             dy = lbl_escada.getY();
             lbl_boneco.setLocation(x, lbl_escada.getY());
             //System.out.println("encostou");
-            
+
             fy = lbl_escada.getY() - 30;
             x = x + dx;
-            
+
         } else if (lbl_boneco.getBounds().intersects(lbl_escada2.getBounds())) {
-            
+
             dy = lbl_escada2.getY();
             lbl_boneco.setLocation(x, lbl_escada2.getY());
             //System.out.println("encostou");
-            
+
             fy = lbl_escada2.getY() - 30;
             x = x + dx;
-            
+
         } else if (lbl_boneco.getBounds().intersects(lbl_gui2.getBounds())) {
-            
+
             dy = lbl_gui2.getY();
             lbl_boneco.setLocation(x, lbl_gui2.getY());
             //System.out.println("encostou");
-            
+
             fy = lbl_gui2.getY() - 30;
             x = x + dx;
-            
+
         } else {
             isJumping = true;
             fy = 900;
         }
-        
+
     }
-    
+
     public void ganhou() {
         if (lbl_boneco.getBounds().intersects(lbl_plataformaWind.getBounds())) {
             JOptionPane.showMessageDialog(null, "VICTORY");
             x = 100;
             y = 720;
-            
+
             boolean win = false;
             win = true;
             if (win) {
@@ -360,11 +371,11 @@ public class Nivel2 extends JFrame implements KeyListener {
                 //tela_nivel1.dispose();
                 //win = false;
                 tela_nivel1.dispatchEvent(new WindowEvent(tela_nivel1, WindowEvent.WINDOW_CLOSING));
-                
+
             }
         }
     }
-    
+
     public void pular() {
         ////pulo
         if (isJumping) {
@@ -376,9 +387,9 @@ public class Nivel2 extends JFrame implements KeyListener {
             isJumping = false;
             velocity = 0;
         }
-        
+
     }
-    
+
     public void movimntaçãoBixo() {
         if (movbic == true) {
             bx += 10;
@@ -394,7 +405,7 @@ public class Nivel2 extends JFrame implements KeyListener {
             }
         }
         bixo1.setLocation(bx, by);
-        
+
         if (movbic1 == true) {
             bx1 += 10;
             //System.out.println("bixo a direita");
@@ -409,33 +420,64 @@ public class Nivel2 extends JFrame implements KeyListener {
             }
         }
         bixo2.setLocation(bx1, by1);
-        
+
     }
-    
+
+    public void bala() {
+        Random r = new Random();
+        int numerosorteado = r.nextInt(10);
+        System.out.println(numerosorteado);
+
+        if (b == true && numerosorteado == 1) {
+            b = false;
+            pbx = bixo1.getX() + 10;
+
+        }
+        if (bala.getX() >= 2000||bala.getX()<=500) {
+            b = true;
+
+        }
+        System.out.println(b);
+
+    }
+
     public void update() {
+        bala();
         mortes();
         colisao();
         pular();
         ganhou();
         movimntaçãoBixo();
+        if(movbic==true||b==false){
+         pbx += 20;
+         
+        }else if(movbic==false||b==true){
+            pbx-=20;
+        } 
         
+        
+        
+                   
+
+        bala.setLocation(pbx, bixo1.getY());
+
         lbl_boneco.setLocation(x, y);
         repaint();
     }
-    
+
     @Override
     public void keyTyped(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     @Override
     public void keyReleased(KeyEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
