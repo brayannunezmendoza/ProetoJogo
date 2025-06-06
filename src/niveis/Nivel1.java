@@ -72,6 +72,7 @@ public class Nivel1 extends JFrame implements KeyListener {
             tela_nivel1.setLocationRelativeTo(null);
 
             new Timer(20, e -> update()).start();
+        mov();
 
             //configurando boneco
             lbl_boneco.setIcon(imgboneco);
@@ -164,6 +165,9 @@ public class Nivel1 extends JFrame implements KeyListener {
         }
 
         tela_nivel1.setVisible(true);
+        
+    } 
+        public void mov(){
         tela_nivel1.addKeyListener(new KeyAdapter() {
             //movimentação
 
