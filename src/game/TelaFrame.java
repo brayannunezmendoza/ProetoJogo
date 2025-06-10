@@ -46,13 +46,15 @@ public class TelaFrame extends JFrame {
             lblP8 = new Nivel2().getLblPlataforma8(), lblP9 = new Nivel2().getLblPlataforma9(),
             lblP10 = new Nivel2().getLblPlataforma10();
 
-    private int nivelNivel = 0;
+    private int nivelNivel =1 ;
+    
     //adicionar cenario nivel 5
     //definir spaw em cada nivel
     private ArrayList<Integer> lista;
 //receber valor de nivel
 
     public TelaFrame() {
+        
 
         mostrarLista();
 
@@ -362,6 +364,8 @@ public class TelaFrame extends JFrame {
                     pulando = true;
                     velocidade = 20;
                     caindo = false;
+                
+                    
 
                 }
             }
