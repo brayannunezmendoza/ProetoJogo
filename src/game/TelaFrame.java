@@ -22,6 +22,7 @@ import nivel.Nivel2;
  */
 public class TelaFrame extends JFrame implements KeyListener {
 
+
     private JLabel lblp2;
     private Nivel2 nivel2;
     private Player player;
@@ -33,11 +34,13 @@ public class TelaFrame extends JFrame implements KeyListener {
     private int velocidade;
     private Rectangle r1;
     private int fy = 1000;
-    private int nY;
-    private int nivelNivel = 1;
+ 
+    private int nivelNivel = 2;
+    //adicionar cenario nivel 5
+    //definir spaw em cada nivel
     private ArrayList<Integer> lista;
 //receber valor de nivel
-    private JLabel lblfundo;
+    
 
     public TelaFrame() {
 
@@ -56,6 +59,7 @@ public class TelaFrame extends JFrame implements KeyListener {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
+
         //ADD ao Frame
         /*add(nivel2.getLblPlataforma1());
         add(nivel2.getLblPlataforma2());
@@ -63,7 +67,6 @@ public class TelaFrame extends JFrame implements KeyListener {
         add(nivel2.getLblPlataforma4());
         add(nivel2.getLblPlataforma5());
         add(lblp2);*/
-
         //Posivionando Labels
         /* nivel2.getLblPlataforma1().setLocation(0, 800);
         nivel2.getLblPlataforma2().setLocation(700, 700);
@@ -74,27 +77,31 @@ public class TelaFrame extends JFrame implements KeyListener {
 
             //conf Plataformas nivel 1
             lblp2 = new Nivel2().getLblFundo();
-            lblp2.setVisible(false);
+            lblp2.setVisible(true);
             add(nivel2.getLblPlataforma1());
             add(nivel2.getLblPlataforma2());
             add(nivel2.getLblPlataforma3());
             add(nivel2.getLblPlataforma4());
-            add(nivel2.getLblPlataforma5()); 
+            add(nivel2.getLblPlataforma5());
             add(nivel2.getLblPlataforma6());
+            add(nivel2.getLblPlataforma7());
             add(nivel2.getLblPlataforma8());
             add(nivel2.getLblPlataforma9());
-            add(lblp2);
+
             nivel2.getLblPlataforma1().setLocation(0, 800);
             nivel2.getLblPlataforma2().setLocation(700, 700);
             nivel2.getLblPlataforma3().setLocation(1300, 600);
             nivel2.getLblPlataforma4().setBounds(1550, 400, 40, 200);
             nivel2.getLblPlataforma5().setLocation(1000, 300);
             nivel2.getLblPlataforma6().setLocation(300, 300);
-            nivel2.getLblPlataforma7().setLocation(0, 100);
-            nivel2.getLblPlataforma8().setLocation(0, 10   );
+            nivel2.getLblPlataforma7().setLocation(500, 100);
+            nivel2.getLblPlataforma8().setLocation(0, 10);
             nivel2.getLblPlataforma9().setLocation(1500, 100);
+            nivel2.getLblPlataforma9().setVisible(true);
+            add(lblp2);
 
-        } else if (nivelNivel == 2) {
+        }
+        else if (nivelNivel == 2) {
             //conf Plataformas nivel 2
             lblp2 = new Nivel2().getLblFundo1();
             add(nivel2.getLblPlataforma1());
@@ -108,7 +115,8 @@ public class TelaFrame extends JFrame implements KeyListener {
             nivel2.getLblPlataforma3().setLocation(400, 500);
             nivel2.getLblPlataforma4().setLocation(10, 400);
             nivel2.getLblPlataforma5().setLocation(500, 300);
-        } else if (nivelNivel == 3) {
+        }
+        else if (nivelNivel == 3) {
             //conf Plataformas nivel 3
             lblp2 = new Nivel2().getLblFundo2();
 
@@ -123,7 +131,8 @@ public class TelaFrame extends JFrame implements KeyListener {
             nivel2.getLblPlataforma3().setLocation(400, 500);
             nivel2.getLblPlataforma4().setLocation(10, 400);
             nivel2.getLblPlataforma5().setLocation(500, 300);
-        } else if (nivelNivel == 4) {
+        } 
+        else if (nivelNivel == 4) {
             //conf Plataformas nivel 4
             lblp2 = new Nivel2().getLblFundo3();
 
@@ -138,7 +147,8 @@ public class TelaFrame extends JFrame implements KeyListener {
             nivel2.getLblPlataforma3().setLocation(400, 500);
             nivel2.getLblPlataforma4().setLocation(10, 400);
             nivel2.getLblPlataforma5().setLocation(500, 300);
-        } else if (nivelNivel == 5) {
+        } 
+        else if (nivelNivel == 5) {
             //conf Plataformas nivel 5
             add(nivel2.getLblPlataforma1());
             add(nivel2.getLblPlataforma2());
@@ -151,8 +161,8 @@ public class TelaFrame extends JFrame implements KeyListener {
             nivel2.getLblPlataforma3().setLocation(400, 500);
             nivel2.getLblPlataforma4().setLocation(10, 400);
             nivel2.getLblPlataforma5().setLocation(500, 300);
-        } else //erro de tela
-        {
+        } //erro de tela
+        else {
             System.out.println("Sem nivel disponivel");
             System.out.println("Nivel nao carregado");
         }
@@ -186,7 +196,7 @@ public class TelaFrame extends JFrame implements KeyListener {
                 if (tecla == KeyEvent.VK_A) {
                     novoX = -10;
                 }
-                if (tecla == KeyEvent.VK_SPACE/* && caindo == true*/) {
+                if (tecla == KeyEvent.VK_SPACE && caindo == true) {
                     pulando = true;
                     velocidade = 20;
                     caindo = false;
@@ -205,11 +215,10 @@ public class TelaFrame extends JFrame implements KeyListener {
             }
         });
 
-       // nY = 10;
-       // nivel2.setN(nY);
+        // nY = 10;
+        // nivel2.setN(nY);
         //nivel2.getN();
         //System.out.println(nivel2.getN());
-
     }
 
     public void receberLista(ArrayList<Integer> novaLista) {
@@ -252,17 +261,50 @@ public class TelaFrame extends JFrame implements KeyListener {
         caindo = true;
     }
 
-    
+    public void colbaixo() {
+        if (player.getBounds().intersects(nivel2.getLblPlataforma1().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma2().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma3().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma4().getBounds())) {
+        if (nivelNivel == 1) {
+            }
+        else {
+                velocidade = -10;
+            }
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma5().getBounds())) {
+            velocidade = -5;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma6().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma7().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma8().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma9().getBounds())) {
+            velocidade = -10;
+        }
+        if (player.getBounds().intersects(nivel2.getLblPlataforma10().getBounds())) {
+            velocidade = -10;
+        }
+    }
+
     public void colisao() {
         if (player.getBounds().intersects(nivel2.getLblPlataforma1().getBounds())) {
-            if (player.getY() + player.getHeight()-10 <= nivel2.getLblPlataforma1().getY() + 20) {
+            if (player.getY() + player.getHeight() - 10 <= nivel2.getLblPlataforma1().getY() + 20) {
                 player.setLocation(player.getX(), nivel2.getLblPlataforma1().getY() - player.getHeight());
-                
                 velocidade = 0;
                 pulando = false;
                 caindo = true;
-                
-            } else {
             }
         }
         if (player.getBounds().intersects(nivel2.getLblPlataforma2().getBounds())) {
@@ -271,9 +313,7 @@ public class TelaFrame extends JFrame implements KeyListener {
                 pulando = false;
                 velocidade = 0;
                 caindo = true;
-            } else {
             }
-
         }
         if (player.getBounds().intersects(nivel2.getLblPlataforma3().getBounds())) {
             if (player.getY() + player.getHeight() <= nivel2.getLblPlataforma3().getY() + 20) {
@@ -289,7 +329,6 @@ public class TelaFrame extends JFrame implements KeyListener {
                 pulando = false;
                 velocidade = 0;
                 caindo = true;
-            } else {
             }
         }
         if (player.getBounds().intersects(nivel2.getLblPlataforma5().getBounds())) {
@@ -330,14 +369,14 @@ public class TelaFrame extends JFrame implements KeyListener {
         //if (player.getBounds().intersects(nivel2.getRec3().getBounds())) {
         //player.setLocation(player.getX(), (int) (nivel2.getRec3().getY() - player.getHeight()));
         else {
-            fy = 1000;
             pulando = true;
-
         }
 
     }
 
     public void update() {
+        colbaixo();
+        System.out.println(player.getY());
         pulando();
         mover();
         pX += novoX;

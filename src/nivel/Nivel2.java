@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nivel;
 
 import java.awt.Color;
@@ -13,7 +9,6 @@ import game.EscolhaNivel;
 import javax.swing.JFrame;
 
 public class Nivel2 {
-    //receber valor de 
 
     private JLabel lblPlataforma1;
     private JLabel lblPlataforma2;
@@ -39,24 +34,23 @@ public class Nivel2 {
     private Rectangle rec8;
     private Rectangle rec9;
     private Rectangle rec10;
+    private ImageIcon moeda;
+    private JLabel lblMoeda;
 
     private int pw = 300;
     private int ph = 35;
     private int lx;
     private int ly;
-    private int ry;
-    private int rx;
-    private int rw;
-    private int rh;
     private int n;
 
     public Nivel2() {
 
-        lblFundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo1.jpeg")));
-        lblFundo1 = new JLabel(new ImageIcon(getClass().getResource("/res/fundo2.png")));
+         lblFundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo1.jpeg")));
+         lblFundo1 = new JLabel(new ImageIcon(getClass().getResource("/res/fundo2.png")));
          lblFundo2 = new JLabel(new ImageIcon(getClass().getResource("/res/fundo3.png")));
-        lblFundo3 = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
-
+         lblFundo3 = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
+       // moeda = new ImageIcon(getClass().getResource("/res/moeda.png"));
+        lblMoeda = new JLabel(new ImageIcon(getClass().getResource("/res/moeda.png")));
         lblPlataforma1 = new JLabel();
         lblPlataforma2 = new JLabel();
         lblPlataforma3 = new JLabel();
@@ -68,15 +62,18 @@ public class Nivel2 {
         lblPlataforma8 = new JLabel();
         lblPlataforma9 = new JLabel();
         lblPlataforma10 = new JLabel();
+        
+        lblMoeda.setSize(50, 50);
+       lblMoeda.setVisible(true);
 
         lblFundo.setSize(1600, 900);
         lblFundo.setLocation(0, 0);
         lblFundo.setVisible(true);
-        
+
         lblFundo1.setSize(1600, 900);
         lblFundo1.setLocation(0, 0);
         lblFundo1.setVisible(true);
-        
+
         lblFundo2.setSize(1600, 900);
         lblFundo2.setLocation(0, 0);
         lblFundo2.setVisible(true);
@@ -232,5 +229,9 @@ public class Nivel2 {
 
     public JLabel getLblFundo3() {
         return lblFundo3;
+    }
+
+    public JLabel getLblMoeda() {
+        return lblMoeda;
     }
 }
