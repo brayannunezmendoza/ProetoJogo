@@ -8,10 +8,6 @@ package entradas;
  *
  * @author braya
  */
-public class Teclado {
-    
-    
-    
-    
+public class Entrar {
     
 }
