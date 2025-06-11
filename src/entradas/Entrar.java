@@ -8,6 +8,7 @@ package entradas;
  *
  * @author braya
  */
+import game.Tela;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -22,7 +23,7 @@ import javax.swing.JOptionPane;
 
 public class Entrar extends JFrame {
 
-    private JFrame container;           //
+    private JFrame login;           //
     //labels
     private JLabel lbl_nomeJogo;
     private JLabel lbl_instrucaoJogo;
@@ -47,8 +48,8 @@ public class Entrar extends JFrame {
 
     public Entrar() {
         //instanciando objetos
-        container = new JFrame();
-        container.setLayout(null);
+        login = new JFrame();
+        login.setLayout(null);
         lbl_fundo = new JLabel();
         lbl_email = new JLabel();
         lbl_senha = new JLabel();
@@ -58,21 +59,21 @@ public class Entrar extends JFrame {
         lbl_nomeJogo = new JLabel();
         lbl_instrucaoJogo = new JLabel();
         //configurando o containe frame
-        container.setSize(1600, 900);
-        container.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        container.setLocationRelativeTo(null);
-        container.setResizable(false);
+        login.setSize(1600, 900);
+        login.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        login.setLocationRelativeTo(null);
+        login.setResizable(false);
         //lbl
         //nome jogo
         lbl_nomeJogo.setText("Arlot");
         lbl_nomeJogo.setSize(170, 60);
-        lbl_nomeJogo.setLocation(container.getWidth() / 2 - (lbl_nomeJogo.getWidth() / 2), 150);
+        lbl_nomeJogo.setLocation(login.getWidth() / 2 - (lbl_nomeJogo.getWidth() / 2), 150);
         lbl_nomeJogo.setFont(new Font("Ubuntu", Font.BOLD, 70));
         lbl_nomeJogo.setForeground(Color.red);
         lbl_nomeJogo.setVisible(true);
         //instrução ao jogador
         lbl_instrucaoJogo.setSize(480, 30);
-        lbl_instrucaoJogo.setLocation(container.getWidth() / 2 - (lbl_instrucaoJogo.getWidth() / 2), 300);
+        lbl_instrucaoJogo.setLocation(login.getWidth() / 2 - (lbl_instrucaoJogo.getWidth() / 2), 300);
         lbl_instrucaoJogo.setText("Complete os campos abaixo para entrar na sua conta");
         lbl_instrucaoJogo.setFont(new Font("Arial", NORMAL, 20));
         lbl_instrucaoJogo.setForeground(Color.WHITE);
@@ -110,9 +111,10 @@ public class Entrar extends JFrame {
         psw_senha.setOpaque(true);
         psw_senha.setForeground(Color.black);
         psw_senha.setVisible(true);
+
         //btn
         btn_entrar.setSize(150, 60);
-        btn_entrar.setLocation(container.getWidth() / 2 - (btn_entrar.getWidth() / 2), psw_senha.getY() + 80);
+        btn_entrar.setLocation(login.getWidth() / 2 - (btn_entrar.getWidth() / 2), psw_senha.getY() + 80);
         btn_entrar.setFont(new Font("Arial", NORMAL, 35));
         btn_entrar.setBackground(new Color(246, 190, 0));
         btn_entrar.setOpaque(true);
@@ -125,17 +127,40 @@ public class Entrar extends JFrame {
         lbl_fundo.setBounds(0, 0, 1600, 900);
         lbl_fundo.setVisible(true);
         //container
-        container.add(btn_entrar);
-        container.add(txt_email);
-        container.add(psw_senha);
-        container.add(lbl_email);
-        container.add(lbl_senha);
-        container.add(lbl_nomeJogo);
-        container.add(lbl_instrucaoJogo);
-        container.add(lbl_fundo);
+        login.add(btn_entrar);
+        login.add(txt_email);
+        login.add(psw_senha);
+        login.add(lbl_email);
+        login.add(lbl_senha);
+        login.add(lbl_nomeJogo);
+        login.add(lbl_instrucaoJogo);
+        login.add(lbl_fundo);
 
-        container.setVisible(true);
-        armazenarDados();
+        login.setVisible(true);
+
+//inputDados();
+        btn_entrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String senhatxt = new String(psw_senha.getText());
+                String emailtxt = new String(txt_email.getText());
+                if (senha.equals(senhatxt) && email.equals(emailtxt)) {
+                    JOptionPane.showMessageDialog(null, "acesso permitido");
+
+                    login.dispose();
+                    new Tela();
+                    login.dispose();
+
+                } else {
+                  /*  JOptionPane.showMessageDialog(null, """
+                                                          Senha ou email incorretos
+                                                          Tente novamente
+                                                          """);*/
+
+                }
+            }
+        }
+        );
     }
 
     public void verificação() {
@@ -150,26 +175,38 @@ public class Entrar extends JFrame {
         return senha;
     }
 
-    public void armazenarDados() {
+    /* public void confirmardado(String ema, String senh){
+        if (ema==getEmail()){
+            System.out.println("condfirm");
+        }
+ 
+    }*/
+ /*
+    public void inputDados() {
         btn_entrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                
+             
+                
                 //email = txt_email.getText();
                 //senha = psw_senha.getText();
-                System.out.println(email);
-                System.out.println(senha);
+                //System.out.println(email);
+                //System.out.println(senha);
                 //fazer confirmação de senha e email com o banco de dados
-                if (getEmail() == txt_email.getText()) {
-                    JOptionPane.showMessageDialog(null, "acesso permitido");
-                } 
-                System.out.println(txt_email.getText());
-                System.out.println(psw_senha.getText());
+               // if ("123" == txt_email.getText()) {
+                 //   JOptionPane.showMessageDialog(null, "acesso permitido");
+                //}
+               // System.out.println(txt_email.getText());
+               // System.out.println(psw_senha.getText());
 
             }
         }
         );
     }
 
+     */
 
 ///Adicionar banco de dados
             ///banco de dados ira verificar se existem dados relacionados e se são iguais

@@ -1,20 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package game;
 
 import entidades.Player;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+////import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
-import nivel.Nivel2;
+import nivel.Plataformas;
+import nivel.gerenciadorNivel;
+import game.EscolhaNivel;
 
 /**
  *
@@ -22,8 +20,9 @@ import nivel.Nivel2;
  */
 public class TelaFrame extends JFrame {
 
+    private EscolhaNivel newn;
     private JLabel lblFundo;
-    private Nivel2 nivel2;
+    private Plataformas nivel2;
     private Player player;
     private int pX = 1, pY = 700;
     private int novoX, novoY;
@@ -31,7 +30,6 @@ public class TelaFrame extends JFrame {
     private boolean pulando = false;
     private boolean caindo = true;
     private int velocidade;
-    private Rectangle r1;
     private int fy = 1000;
     private JLabel moeda1;
     private JLabel moeda2;
@@ -39,36 +37,38 @@ public class TelaFrame extends JFrame {
     private JLabel moeda4;
     private JLabel moeda5;
     private JLabel moeda;
-    private JLabel lblP1 = new Nivel2().getLblPlataforma1(),
-            lblP2 = new Nivel2().getLblPlataforma2(), lblP3 = new Nivel2().getLblPlataforma3(),
-            lblP4 = new Nivel2().getLblPlataforma4(), lblP5 = new Nivel2().getLblPlataforma5(),
-            lblP6 = new Nivel2().getLblPlataforma6(), lblP7 = new Nivel2().getLblPlataforma7(),
-            lblP8 = new Nivel2().getLblPlataforma8(), lblP9 = new Nivel2().getLblPlataforma9(),
-            lblP10 = new Nivel2().getLblPlataforma10();
+    private JLabel lblP1 = new Plataformas().getLblPlataforma1(),
+            lblP2 = new Plataformas().getLblPlataforma2(), lblP3 = new Plataformas().getLblPlataforma3(),
+            lblP4 = new Plataformas().getLblPlataforma4(), lblP5 = new Plataformas().getLblPlataforma5(),
+            lblP6 = new Plataformas().getLblPlataforma6(), lblP7 = new Plataformas().getLblPlataforma7(),
+            lblP8 = new Plataformas().getLblPlataforma8(), lblP9 = new Plataformas().getLblPlataforma9(),
+            lblP10 = new Plataformas().getLblPlataforma10();
+    private int nivelNivel = 1;
 
-    private int nivelNivel =1 ;
-    
     //adicionar cenario nivel 5
     //definir spaw em cada nivel
-    private ArrayList<Integer> lista;
 //receber valor de nivel
-
     public TelaFrame() {
-        
+        //receberValor();
+        // System.out.println(receberValor());
+        //m=new EscolhaNivel();
 
-        mostrarLista();
-
+        //nivelNivel = m.mandarValor();
+        //System.out.println("tem: "+m);
+        // nivelNivel=receberValor();
+        // System.out.println(receberValor());
+        //gerenciadorNivel.setValor(3);
+        //nivelNivel = receberValor();
         //GerenciadorNiveis gerente = new GerenciadorNiveis();
         //gerente.setLevelsLista(listaNiveis);
         lblFundo = new JLabel();
-        nivel2 = new Nivel2();
-        moeda = new Nivel2().getLblMoeda();
-        moeda1 = new Nivel2().getLblMoeda();
-        moeda2 = new Nivel2().getLblMoeda();
-        moeda3 = new Nivel2().getLblMoeda();
-        moeda4 = new Nivel2().getLblMoeda();
-        moeda5 = new Nivel2().getLblMoeda();
-
+        nivel2 = new Plataformas();
+        moeda = new Plataformas().getLblMoeda();
+        moeda1 = new Plataformas().getLblMoeda();
+        moeda2 = new Plataformas().getLblMoeda();
+        moeda3 = new Plataformas().getLblMoeda();
+        moeda4 = new Plataformas().getLblMoeda();
+        moeda5 = new Plataformas().getLblMoeda();
         player = new Player("/res/boneco.png", pX, pY);
         add(player);
         //tela Frame
@@ -77,9 +77,22 @@ public class TelaFrame extends JFrame {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
+        //System.out.println("TelaFrame"+gerente.getLevels());
+        mapa();
 
-        if(nivelNivel==0){
-    
+        setResizable(true);
+        setVisible(true);
+        timer = new Timer(0, e -> update());
+        timer.start();
+        //teclado
+        setFocusable(true);
+
+    }
+
+    public void mapa() {
+        if (nivelNivel == 0) {
+            System.out.println("nivel obrigado 0");
+
         }
         if (nivelNivel == 1) {
 
@@ -89,7 +102,7 @@ public class TelaFrame extends JFrame {
             System.out.println(moeda.getLocation());
 
             //conf Plataformas nivel 1
-            lblFundo = new Nivel2().getLblFundo();
+            lblFundo = new Plataformas().getLblFundo();
             lblFundo.setVisible(true);
 
             add(lblP1);
@@ -118,7 +131,7 @@ public class TelaFrame extends JFrame {
 
         } else if (nivelNivel == 2) {
             //conf Plataformas nivel 2
-            lblFundo = new Nivel2().getLblFundo1();
+            lblFundo = new Plataformas().getLblFundo1();
             add(lblP1);
             add(lblP2);
             add(lblP3);
@@ -132,7 +145,7 @@ public class TelaFrame extends JFrame {
             nivel2.getLblPlataforma5().setLocation(500, 300);
         } else if (nivelNivel == 3) {
             //conf Plataformas nivel 3
-            lblFundo = new Nivel2().getLblFundo2();
+            lblFundo = new Plataformas().getLblFundo2();
             add(lblP1);
             add(lblP2);
             add(lblP3);
@@ -146,7 +159,7 @@ public class TelaFrame extends JFrame {
             nivel2.getLblPlataforma5().setLocation(500, 300);
         } else if (nivelNivel == 4) {
             //conf Plataformas nivel 4
-            lblFundo = new Nivel2().getLblFundo3();
+            lblFundo = new Plataformas().getLblFundo3();
             add(lblP1);
             add(lblP2);
             add(lblP3);
@@ -177,22 +190,6 @@ public class TelaFrame extends JFrame {
             System.out.println("Nivel nao carregado");
         }
 
-        setResizable(true);
-        setVisible(true);
-        timer = new Timer(0, e -> update());
-        timer.start();
-        //teclado
-
-    }
-
-    public void receberLista(ArrayList<Integer> novaLista) {
-        lista.addAll(novaLista);//adiciona todos os elementos 
-
-    }
-
-    public void mostrarLista() {
-
-        System.out.println(lista);
     }
 
     public void pulando() {
@@ -206,9 +203,9 @@ public class TelaFrame extends JFrame {
 
     }
 
-    public void novaPos(int np) {
-        pulando = false;
+    public void novaPos() {
         velocidade = 0;
+        pulando = false;
         caindo = true;
     }
 
@@ -252,95 +249,76 @@ public class TelaFrame extends JFrame {
         if (player.getBounds().intersects(lblP1.getBounds())) {
             if (player.getY() + player.getHeight() - 10 <= lblP1.getY() + 20) {
                 player.setLocation(player.getX(), lblP1.getY() - player.getHeight());
-                velocidade = 0;
-                pulando = false;
-                caindo = true;
+                novaPos();
             }
         }
         if (player.getBounds().intersects(lblP2.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP2.getY() + 20) {
                 player.setLocation(player.getX(), lblP2.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+                novaPos();
+
             }
         }
+
         if (player.getBounds().intersects(lblP3.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP3.getY() + 20) {
                 player.setLocation(player.getX(), lblP3.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+                novaPos();
             }
         }
         if (player.getBounds().intersects(lblP4.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP4.getY() + 20) {
                 player.setLocation(player.getX(), lblP4.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+                novaPos();
             }
         }
         if (player.getBounds().intersects(lblP5.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP5.getY() + 20) {
                 player.setLocation(player.getX(), lblP5.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+                novaPos();
             } else {
             }
         }
         if (player.getBounds().intersects(lblP6.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP6.getY() + 20) {
                 player.setLocation(player.getX(), lblP6.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+               novaPos();
             } else {
             }
         }
         if (player.getBounds().intersects(lblP7.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP7.getY() + 20) {
                 player.setLocation(player.getX(), lblP7.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+                novaPos();
             }
         }
         if (player.getBounds().intersects(lblP8.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP8.getY() + 20) {
                 player.setLocation(player.getX(), lblP8.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+               novaPos();
             }
         }
         if (player.getBounds().intersects(lblP9.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP9.getY() + 20) {
                 player.setLocation(player.getX(), lblP9.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+                novaPos();
             }
         }
         if (player.getBounds().intersects(lblP10.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP10.getY() + 20) {
                 player.setLocation(player.getX(), lblP10.getY() - player.getHeight());
-                pulando = false;
-                velocidade = 0;
-                caindo = true;
+               novaPos();
             }
         } else {
             pulando = true;
         }
-
     }
 
     public void update() {
+        //   teste();
         mover();
         colbaixo();
         pulando();
-        mover();
         pX += novoX;
         pY += novoY;
         player.setLocation(pX, pY);
@@ -364,8 +342,6 @@ public class TelaFrame extends JFrame {
                     pulando = true;
                     velocidade = 20;
                     caindo = false;
-                
-                    
 
                 }
             }
@@ -381,14 +357,6 @@ public class TelaFrame extends JFrame {
                 }
             }
         });
-    }
-
-    public int getNivelNivel() {
-        return nivelNivel;
-    }
-
-    public void setNivelNivel(int nivelNivel) {
-        this.nivelNivel = nivelNivel;
     }
 
     public void pontoSpanw() {
@@ -430,4 +398,9 @@ public class TelaFrame extends JFrame {
         }
     }
 
+    public void teste() {
+
+    }
+
+   
 }

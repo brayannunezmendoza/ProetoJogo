@@ -48,6 +48,13 @@ public class CriarConta {
     private JButton btn_Cadastrar;
     private JPanel p;
 
+    String nome;
+    String email;
+    String celular;
+    String username;
+    String senha;
+    String confirmarSenha;
+
     //contrutor
     public CriarConta() {
         telaCadastro = new JFrame();
@@ -230,13 +237,23 @@ public class CriarConta {
     }
 
     public void criarConta() {
-        String nome = txt_nome.getText();
-        String email = txt_gmail.getText();
-        String celular = txt_celular.getText();
-        String username = txt_username.getText();
-        String senha = txt_senha.getText();
-        String confirmarSenha = txt_senhaConfirmar.getText();
-        if (senha != confirmarSenha) {
+        nome = txt_nome.getText();
+        email = txt_gmail.getText();
+        celular = txt_celular.getText();
+        username = txt_username.getText();
+        String senha1 = txt_senha.getText();
+        String confirmarSenha1 = txt_senhaConfirmar.getText();
+        confirmar(senha1, confirmarSenha1);
+
+       
+    }
+
+    public void confirmar(String senha, String confirmar) {
+        this.senha = senha;
+        this.confirmarSenha = confirmar;
+         if (senha != confirmarSenha) {
+            System.out.println(confirmarSenha);
+            System.out.println(senha);
             JOptionPane.showMessageDialog(null, "Senhas incopativeis");
         } else {
             JOptionPane.showMessageDialog(null, nome + "\n" + email + "\n" + celular + "\n" + username + "\n" + senha + "\n" + confirmarSenha);

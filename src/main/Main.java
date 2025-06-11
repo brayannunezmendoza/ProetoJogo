@@ -13,25 +13,35 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import entradas.Entrar;
 import entradas.CriarConta;
+import game.Tela;
+import nivel.Nivel1;
+import nivel.Nivel2;
+import nivel.Nivel3;
+import nivel.Nivel4;
+import nivel.Nivel6;
+import nivel.gerenciadorNivel;
 
 public class Main {
 
     public static void main(String[] args) {
-       
-        //tela 1 Acesso ao sistema
-        //new TelaInicial();//<new EscolhaAcesso();
-       
-       new EscolhaAcesso();
 
+       
+        ///new EscolhaAcesso(); //0
+        //new EscolhaNivel();   //0
+        //new Nivel1();         //definic cor dos label 
+        new Nivel2();
         
-        
-        
-        
+        //new Nivel6();
         // new GerenciadorArray();
+        //new Nivel4();
+        //new Nivel3();
+        
+        
+        //new TelaFrame();    
 
-        //JFrame e = new EscolhaNivel();    
+    
 
-        /////////////////////////////////
+/////////////////////////////////
         ///        new TelaFrame();//setar a posição dos label e do player moeda 
 
         ///

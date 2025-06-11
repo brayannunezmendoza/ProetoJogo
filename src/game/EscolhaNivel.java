@@ -14,52 +14,50 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import game.TelaFrame;
+import nivel.gerenciadorNivel;
 
-public class EscolhaNivel extends JFrame {
+public class EscolhaNivel  {
 
-    private int nivel;
+    
     private JLabel escolha1;
     private JLabel escolha2;
     private JLabel escolha3;
     private JLabel escolha4;
     private JLabel escolha5;
     private JLabel escolha6;
-    private JLabel escolha7;
-    private JLabel escolha8;
-    private JLabel escolha9;
-    private JLabel escolha10;
     private JLabel fundo;
     private int x = 200, y = 300;
     private int h = 200;
     private int w = 400;
-    private ArrayList<Integer> l1;
+    //private ArrayList<Integer> l1;
     private int levels;
+    private JFrame janela;
+    int a =1;
+   
 //private TelaFrame t;
-
     //enviar valor de nivel para fora
+    
     public EscolhaNivel() {
-
-        setSize(1600, 900);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        janela = new JFrame("ARLOT");
+        janela.setSize(1600, 900);
+        janela.setLocationRelativeTo(null);
+        janela.setDefaultCloseOperation(1);
         escolhas();
         fundo();
-        setVisible(true);
-        l1 = new ArrayList<>();
-        l1.add(0, 0);//valores 
-        l1.add(1, 0);
-        l1.add(2, 0);
-        l1.add(3, 0);
-        l1.add(4, 0);
-        l1.add(5, 0);
+        janela.setVisible(true);
+        
+        
+      
+        
 
     }
 
+    
     public void fundo() {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundoescolha.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
-        add(fundo);
+        janela.add(fundo);
 
     }
 
@@ -70,10 +68,7 @@ public class EscolhaNivel extends JFrame {
         escolha4 = new JLabel("Nivel 4 Bloquedo");
         escolha5 = new JLabel("Nivel 5 Bloquedo");
         escolha6 = new JLabel("Nivel 6 Bloquedo");
-        escolha7 = new JLabel("Nivel 7 Bloquedo");
-        escolha8 = new JLabel("Nivel 8 Bloquedo");
-        escolha9 = new JLabel("Nivel 9 Bloquedo");
-        escolha10 = new JLabel("Nivel 10 Bloquedo");
+       
 
         escolha1.setBackground(Color.BLACK);
         escolha1.setForeground(Color.WHITE);
@@ -123,64 +118,68 @@ public class EscolhaNivel extends JFrame {
         escolha6.setOpaque(true);
         escolha6.setVisible(true);
 
-        add(escolha1);
-        add(escolha2);
-        add(escolha3);
-        add(escolha4);
-        add(escolha5);
-        add(escolha6);
+        janela.add(escolha1);
+        janela.add(escolha2);
+        janela.add(escolha3);
+        janela.add(escolha4);
+        janela.add(escolha5);
+        janela.add(escolha6);
 
+        
         clique();
-    }
+    }  
+
+    
+    
+    
+  
+  
+  
+    
 
     public void clique() {
         escolha1.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                l1.set(0, 1);
-
-                System.out.println(l1);
+               // System.out.println(a);
+               new nivel.Nivel1();
+               janela.dispose();
 
             }
         });
         escolha2.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                l1.set(1, 2);
-                System.out.println(l1);
-
+                janela.dispose();
+                new nivel.Nivel2();
             }
         });
         escolha3.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                l1.set(2, 3);
-                System.out.println(l1);
-
+                janela.dispose();
+                new nivel.Nivel3();
             }
         });
         escolha4.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                l1.set(3, 4);
-                System.out.println(l1);
-
+                 janela.dispose();
+                new nivel.Nivel4();
             }
         });
         escolha5.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                l1.set(4, 5);
-                System.out.println(l1);
-
+                 janela.dispose();
+                new nivel.Nivel5();
             }
         });
         escolha6.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                l1.set(5, 6);
-                System.out.println(l1);
+              
             }
         });
     }
 
-    public ArrayList<Integer> getlista() {
-
-        return l1;
-
-    }
+   
+   
+        
+    
+    
 }

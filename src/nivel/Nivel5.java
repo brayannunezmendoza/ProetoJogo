@@ -11,16 +11,15 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  *
  * @author braya
  */
-public class Nivel2 extends JFrame {
-
-    private JLabel fundo;
+public class Nivel5 extends JFrame{
+  private JLabel fundo;
     private Timer time;
     private JFrame nivel4;
     private Player player;
@@ -28,15 +27,15 @@ public class Nivel2 extends JFrame {
             lblP3 = new Plataformas().getLblPlataforma3(), lblP4 = new Plataformas().getLblPlataforma4(), lblP5 = new Plataformas().getLblPlataforma5(),
             lblP6 = new Plataformas().getLblPlataforma6(), lblP7 = new Plataformas().getLblPlataforma7(), lblP8 = new Plataformas().getLblPlataforma8(),
             lblP9 = new Plataformas().getLblPlataforma9(), lblP10 = new Plataformas().getLblPlataforma10();
-    private int pX = 100, pY = 500;
+    private int pX = 100, pY = 700;
     private boolean pulando = false;
     private boolean caindo = true;
     private int velocidade;
     private int fy = 1000;
-    private int novoX, novoY;
-
-    public Nivel2() {
-        fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo3.png")));
+    private int novoX, novoY;    
+    public Nivel5(){
+    
+     fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
 
@@ -54,9 +53,13 @@ public class Nivel2 extends JFrame {
         nivel4.setVisible(true);
         time = new Timer(0, e -> atualização());
         time.start();
-    }
-
-    public void carregarLabels() {
+        
+        
+        
+        
+      
+    
+    } public void carregarLabels() {
         nivel4.add(lblP1);
         nivel4.add(lblP2);
         nivel4.add(lblP3);
@@ -66,11 +69,10 @@ public class Nivel2 extends JFrame {
         nivel4.add(lblP7);
         nivel4.add(lblP8);
         nivel4.add(lblP9);
-        lblP1.setBounds(0, 800, 1600, 50);
+        lblP1.setLocation(0, 800);
         lblP2.setLocation(700, 700);
-        lblP2.setBounds(0, 700, 1300, 50);
         lblP3.setLocation(1300, 600);
-        lblP4.setBounds(1550, 400, 40, 200);//escada
+        lblP4.setBounds(1550, 400, 40, 200);
         lblP5.setLocation(1000, 500);
         lblP6.setLocation(300, 400);
         lblP7.setLocation(500, 100);
@@ -87,9 +89,8 @@ public class Nivel2 extends JFrame {
         pY += novoY;
         player.setLocation(pX, pY);
         colisao();
-
-        barreira();
         repaint();
+        barreira();
     }
 
     public void pontoSpanw() {
@@ -257,5 +258,10 @@ public class Nivel2 extends JFrame {
             pulando = true;
         }
     }
-
+    
+    
+    
+    
+    
+    
 }
