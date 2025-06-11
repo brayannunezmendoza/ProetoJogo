@@ -37,7 +37,6 @@ public class Nivel4 extends JFrame {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
-        
 
         nivel4 = new JFrame("nivel4");
         player = new Player("/res/boneco.png", pX, pY);
@@ -58,44 +57,39 @@ public class Nivel4 extends JFrame {
     }
 
     public void carregarLabels() {
-        nivel4.add(lblP1);
-        nivel4.add(lblP2);
-        nivel4.add(lblP3);
-        nivel4.add(lblP4);
-        //nivel4.add(lblP5);
-       // nivel4.add(lblP6);
-        nivel4.add(lblP7);
-        nivel4.add(lblP8); //platafoma apoio
+        nivel4.add(lblP1);//piso 1
+        nivel4.add(lblP2);  //piso movel 
+        nivel4.add(lblP3);  //piso 2
+        nivel4.add(lblP4);   //armadilha 1
+         nivel4.add(lblP5);
+        //  nivel4.add(lblP6);
+        nivel4.add(lblP7);  //piso apoio 3
+        nivel4.add(lblP8); //platafoma 4
         nivel4.add(lblP9); //plataforma final
-        
+
         lblP1.setBounds(0, 800, 400, 30);
         lblP2.setBounds(400, 800, 400, 30);
         lblP3.setBounds(1000, 800, 400, 30);
-        lblP4.setBounds(400, 125, 400, 30);//armadilha
-        lblP5.setBounds(1600, 800, 50, 30);
-        
-        
-        
-       // lblP6.setLocation(300, 400);
+        lblP4.setBounds(400, 125, 400, 30);
+        lblP5.setBounds(1550, 50, 50, 50);  //aradilha 2
+        lblP5.setBackground(Color.green);
+
+        // lblP6.setLocation(300, 400);
         lblP7.setLocation(450, 100);
         lblP8.setLocation(0, 250);
-        lblP9.setLocation(1200, 100);
+        lblP9.setLocation(1300, 100);
 
     }
 
-    
-    public void moverPlat(){
-    
+    public void moverPlat() {
 
-        lblP2.setLocation(400,lblP2.getY()-3);
-        if(lblP2.getY()<=0){
-         lblP2.setLocation(400, 900);
+        lblP2.setLocation(400, lblP2.getY() - 3);
+        if (lblP2.getY() <= 0) {
+            lblP2.setLocation(400, 900);
         }
-            
-    
-    
-    
+
     }
+
     private void atualização() {
         moverPlat();
         mover();
@@ -228,10 +222,9 @@ public class Nivel4 extends JFrame {
             }
         }
         if (player.getBounds().intersects(lblP4.getBounds())) {
-            if (player.getY() + player.getHeight() <= lblP4.getY() + 20) {
-                player.setLocation(player.getX(), lblP4.getY() - player.getHeight());
-                novaPos();
-            }
+
+            pontoSpanw();
+
         }
         if (player.getBounds().intersects(lblP5.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP5.getY() + 20) {
