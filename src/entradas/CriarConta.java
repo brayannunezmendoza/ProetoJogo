@@ -8,21 +8,23 @@ package entradas;
  *
  * @author braya
  */
-
 import java.awt.Color;
 import java.awt.Font;
 import static java.awt.Frame.NORMAL;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 public class CriarConta {
-    
-      private JFrame telaCadastro;                //
-    private ImageIcon imagem;                   //
+
+    private JFrame telaCadastro;                //
     private JLabel fundo;
 
     //atributos lbl
@@ -45,20 +47,16 @@ public class CriarConta {
     //atributos btn
     private JButton btn_Cadastrar;
     private JPanel p;
-    private ImageIcon tp;
-    JLabel tpl;
 
     //contrutor
-    
-    public CriarConta(){
-    telaCadastro = new JFrame();
+    public CriarConta() {
+        telaCadastro = new JFrame();
         fundo = new JLabel();
         lbl_nomeJogo = new JLabel("Arlot");
         p = new JPanel();
         lbl_mensagem = new JLabel("Preencha suas informações para se cadastrar");
         //configurando tela de cadastro
 
-        
         p.setSize(580, 300);
         p.setLocation(500, 280);
         p.setLayout(null);
@@ -213,10 +211,36 @@ public class CriarConta {
 
         //visibilidade da janela
         telaCadastro.setVisible(true);
-    
-    
+
+        armazenarDados();
+
     }
-    
-    
-    
+
+    public void armazenarDados() {
+        btn_Cadastrar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                criarConta();
+
+            }
+
+        }
+        );
+
+    }
+
+    public void criarConta() {
+        String nome = txt_nome.getText();
+        String email = txt_gmail.getText();
+        String celular = txt_celular.getText();
+        String username = txt_username.getText();
+        String senha = txt_senha.getText();
+        String confirmarSenha = txt_senhaConfirmar.getText();
+        if (senha != confirmarSenha) {
+            JOptionPane.showMessageDialog(null, "Senhas incopativeis");
+        } else {
+            JOptionPane.showMessageDialog(null, nome + "\n" + email + "\n" + celular + "\n" + username + "\n" + senha + "\n" + confirmarSenha);
+        }
+    }
+
 }

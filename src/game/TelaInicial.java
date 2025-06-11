@@ -15,7 +15,7 @@ import javax.swing.SwingConstants;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 public class TelaInicial extends JFrame {
-
+/*
     private JLabel fundo;
     private JLabel lblTextoEntrada;
     private EscolhaNivel escolhanivel;
@@ -31,25 +31,7 @@ public class TelaInicial extends JFrame {
 
     }
 
-    public void telaFundo() {
-        fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundoescolha.png")));
-        fundo.setBounds(0, 0, 1600, 900);
-        fundo.setVisible(true);
-        add(fundo);
-    }
-
-    public void comp() {
-        lblTextoEntrada = new JLabel("CLIQUE NA TELA AGORA");
-        lblTextoEntrada.setBounds(380, 400, 800, 100);
-        lblTextoEntrada.setBackground(Color.yellow);
-        lblTextoEntrada.setForeground(Color.WHITE);
-        lblTextoEntrada.setFont(new Font("Arial", NORMAL, 60));
-        lblTextoEntrada.setHorizontalAlignment(SwingConstants.CENTER);
-        lblTextoEntrada.setOpaque(true);
-        lblTextoEntrada.setVisible(true);
-        add(lblTextoEntrada);
-
-    }
+    
 
     public void clique() {
         addMouseListener(new MouseAdapter() {
@@ -60,5 +42,5 @@ public class TelaInicial extends JFrame {
 
             }
         });
-    }
+    }*/
 }
