@@ -37,10 +37,13 @@ public class Nivel4 extends JFrame {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
+        
 
         nivel4 = new JFrame("nivel4");
         player = new Player("/res/boneco.png", pX, pY);
         player.setBackground(Color.red);
+        nivel4.setResizable(false);
+        nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
         nivel4.add(player);
         carregarLabels();
 
@@ -59,24 +62,42 @@ public class Nivel4 extends JFrame {
         nivel4.add(lblP2);
         nivel4.add(lblP3);
         nivel4.add(lblP4);
-        nivel4.add(lblP5);
-        nivel4.add(lblP6);
+        //nivel4.add(lblP5);
+       // nivel4.add(lblP6);
         nivel4.add(lblP7);
-        nivel4.add(lblP8);
-        nivel4.add(lblP9);
-        lblP1.setLocation(0, 800);
-        lblP2.setLocation(700, 700);
-        lblP3.setLocation(1300, 600);
-        lblP4.setBounds(1550, 400, 40, 200);
-        lblP5.setLocation(1000, 500);
-        lblP6.setLocation(300, 400);
-        lblP7.setLocation(500, 100);
+        nivel4.add(lblP8); //platafoma apoio
+        nivel4.add(lblP9); //plataforma final
+        
+        lblP1.setBounds(0, 800, 400, 30);
+        lblP2.setBounds(400, 800, 400, 30);
+        lblP3.setBounds(1000, 800, 400, 30);
+        lblP4.setBounds(400, 125, 400, 30);//armadilha
+        lblP5.setBounds(1600, 800, 50, 30);
+        
+        
+        
+       // lblP6.setLocation(300, 400);
+        lblP7.setLocation(450, 100);
         lblP8.setLocation(0, 250);
-        lblP9.setLocation(1300, 100);
+        lblP9.setLocation(1200, 100);
 
     }
 
+    
+    public void moverPlat(){
+    
+
+        lblP2.setLocation(400,lblP2.getY()-3);
+        if(lblP2.getY()<=0){
+         lblP2.setLocation(400, 900);
+        }
+            
+    
+    
+    
+    }
     private void atualização() {
+        moverPlat();
         mover();
         colbaixo();
         pulando();
@@ -159,7 +180,7 @@ public class Nivel4 extends JFrame {
             velocidade = -10;
         }
         if (player.getBounds().intersects(lblP2.getBounds())) {
-            velocidade = -10;
+            velocidade = 4;
         }
         if (player.getBounds().intersects(lblP3.getBounds())) {
             velocidade = -10;

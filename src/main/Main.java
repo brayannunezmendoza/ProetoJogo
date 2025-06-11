@@ -28,13 +28,16 @@ public class Main {
        
         ///new EscolhaAcesso(); //0
         //new EscolhaNivel();   //0
-        //new Nivel1();         //definic cor dos label 
-        new Nivel2();
+        //new Nivel1();         //definic cor dos label troca de tela
+        //new Nivel2(); //definic cor label troca de tela
+        //new Nivel3();   //definic cor label troca de tela
         
-        //new Nivel6();
-        // new GerenciadorArray();
-        //new Nivel4();
-        //new Nivel3();
+ new Nivel4();
+
+//new Nivel6();
+       
+       
+        //
         
         
         //new TelaFrame();    

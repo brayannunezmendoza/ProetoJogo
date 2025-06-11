@@ -103,7 +103,6 @@ public class Nivel1 extends JFrame {
         nivel4.add(lblP9);
         nivel4.add(lblP10);
         nivel4.add(lblP11);
-        
 
     }
 
@@ -284,13 +283,16 @@ public class Nivel1 extends JFrame {
             lblP11.setBackground(Color.GREEN);
             pontoSpanw();
 
-        }if (player.getBounds().intersects(lblP11.getBounds())) {
+        }
+        if (player.getBounds().intersects(lblP11.getBounds())) {
             lblP10.setBackground(Color.red);
             JOptionPane.showMessageDialog(null, """
                                                 Passou
-                                                depois de: """+mortes+" mortes");
+                                                depois de: """ + mortes + " mortes");
             pontoSpanw();
-            
+          
+            ////dispose nivel
+            ///add Jframe escolha niveis
         }
         
         else {

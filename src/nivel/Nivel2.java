@@ -6,11 +6,13 @@ package nivel;
 
 import entidades.Player;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -28,22 +30,30 @@ public class Nivel2 extends JFrame {
             lblP3 = new Plataformas().getLblPlataforma3(), lblP4 = new Plataformas().getLblPlataforma4(), lblP5 = new Plataformas().getLblPlataforma5(),
             lblP6 = new Plataformas().getLblPlataforma6(), lblP7 = new Plataformas().getLblPlataforma7(), lblP8 = new Plataformas().getLblPlataforma8(),
             lblP9 = new Plataformas().getLblPlataforma9(), lblP10 = new Plataformas().getLblPlataforma10();
-    private int pX = 100, pY = 500;
+    private int pX = 100, pY = 700;
     private boolean pulando = false;
     private boolean caindo = true;
     private int velocidade;
     private int fy = 1000;
     private int novoX, novoY;
+    private JLabel placar;
+    private int mortes;
 
     public Nivel2() {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo3.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
-
+        placar = new JLabel("Mortes: " + mortes);
+        placar.setBounds(1400, 0, 200, 100);
+        placar.setForeground(Color.white);
+         placar.setFont(new Font("Arial", Font.BOLD, 35));
+        placar.setVisible(true);
+    
         nivel4 = new JFrame("nivel4");
         player = new Player("/res/boneco.png", pX, pY);
         player.setBackground(Color.red);
         nivel4.add(player);
+
         carregarLabels();
 
         nivel4.add(fundo);
@@ -57,6 +67,7 @@ public class Nivel2 extends JFrame {
     }
 
     public void carregarLabels() {
+         nivel4.add(placar);
         nivel4.add(lblP1);
         nivel4.add(lblP2);
         nivel4.add(lblP3);
@@ -66,16 +77,17 @@ public class Nivel2 extends JFrame {
         nivel4.add(lblP7);
         nivel4.add(lblP8);
         nivel4.add(lblP9);
-        lblP1.setBounds(0, 800, 1600, 50);
-        lblP2.setLocation(700, 700);
-        lblP2.setBounds(0, 700, 1300, 50);
-        lblP3.setLocation(1300, 600);
-        lblP4.setBounds(1550, 400, 40, 200);//escada
-        lblP5.setLocation(1000, 500);
-        lblP6.setLocation(300, 400);
-        lblP7.setLocation(500, 100);
-        lblP8.setLocation(0, 250);
-        lblP9.setLocation(1300, 100);
+        nivel4.add(lblP10);
+        lblP1.setBounds(0, 800, 1600, 50);//plataforma
+        lblP2.setBounds(1550, 500, 50, 300);//escada
+        lblP3.setBounds(0, 500, 1300, 50);//plataforma
+        lblP4.setBounds(0, 200, 40, 300);//escada
+        lblP5.setBounds(300, 200, 1300, 50);//plataforma
+        lblP6.setBounds(500, 790, 200, 20);//armadilha
+        lblP7.setBounds(700, 490, 200, 20);//armadilha
+        lblP8.setBounds(700, 180, 200, 20);//madilha
+        lblP10.setBounds(1550, 150, 50, 50);//chegada
+        lblP10.setBackground(Color.GREEN);
 
     }
 
@@ -103,6 +115,8 @@ public class Nivel2 extends JFrame {
             velocidade = 0;
             pY = 700;
             pX = 10;
+            mortes += 1;
+            placar.setText("Mortes: " + mortes);
         }
         if (player.getX() >= 1540 || player.getX() <= 10) {
             novoX = 0;
@@ -159,34 +173,25 @@ public class Nivel2 extends JFrame {
     }
 
     public void colbaixo() {
-        if (player.getBounds().intersects(lblP1.getBounds())) {
-            velocidade = -10;
-        }
+
         if (player.getBounds().intersects(lblP2.getBounds())) {
-            velocidade = -10;
+            velocidade = 5;
         }
         if (player.getBounds().intersects(lblP3.getBounds())) {
             velocidade = -10;
+        }
+        if (player.getBounds().intersects(lblP4.getBounds())) {
+            velocidade = 5;
         }
 
         if (player.getBounds().intersects(lblP5.getBounds())) {
             velocidade = -5;
         }
-        if (player.getBounds().intersects(lblP6.getBounds())) {
-            velocidade = -10;
-        }
-        if (player.getBounds().intersects(lblP7.getBounds())) {
-            velocidade = -10;
-        }
-        if (player.getBounds().intersects(lblP8.getBounds())) {
-            velocidade = -10;
-        }
+
         if (player.getBounds().intersects(lblP9.getBounds())) {
             velocidade = -10;
         }
-        if (player.getBounds().intersects(lblP10.getBounds())) {
-            velocidade = -10;
-        }
+
     }
 
     public void colisao() {
@@ -220,21 +225,19 @@ public class Nivel2 extends JFrame {
             if (player.getY() + player.getHeight() <= lblP5.getY() + 20) {
                 player.setLocation(player.getX(), lblP5.getY() - player.getHeight());
                 novaPos();
+                
             } else {
             }
         }
         if (player.getBounds().intersects(lblP6.getBounds())) {
-            if (player.getY() + player.getHeight() <= lblP6.getY() + 20) {
-                player.setLocation(player.getX(), lblP6.getY() - player.getHeight());
-                novaPos();
-            } else {
-            }
+            pontoSpanw();
+            mortes+=1;
+            placar.setText("Mortes: " + mortes);
         }
         if (player.getBounds().intersects(lblP7.getBounds())) {
-            if (player.getY() + player.getHeight() <= lblP7.getY() + 20) {
-                player.setLocation(player.getX(), lblP7.getY() - player.getHeight());
-                novaPos();
-            }
+           pontoSpanw();
+            mortes+=1;
+            placar.setText("Mortes: " + mortes);
         }
         if (player.getBounds().intersects(lblP8.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP8.getY() + 20) {
@@ -249,10 +252,15 @@ public class Nivel2 extends JFrame {
             }
         }
         if (player.getBounds().intersects(lblP10.getBounds())) {
-            if (player.getY() + player.getHeight() <= lblP10.getY() + 20) {
-                player.setLocation(player.getX(), lblP10.getY() - player.getHeight());
-                novaPos();
-            }
+            JOptionPane.showMessageDialog(null, """
+                                                Passou
+                                                depois de:  """ + mortes + "  mortes");
+            
+            ////dispose nivel
+            ///add Jframe escolha niveis
+            
+            
+            pontoSpanw();
         } else {
             pulando = true;
         }
