@@ -167,7 +167,7 @@ public class EscolhaNivel  {
         escolha5.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                  janela.dispose();
-                new nivel.Nivel5();
+                new nivel.Nivel6();
             }
         });
         escolha6.addMouseListener(new MouseAdapter() {

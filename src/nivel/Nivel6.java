@@ -64,7 +64,7 @@ public class Nivel6 extends JFrame {
         boss.setLocation(2000, 0);
         // boss.setAlignmentX(CENTER_ALIGNMENT);
         boss.setBackground(Color.red);
-        boss.setOpaque(true);
+        boss.setOpaque(false);
         boss.setVisible(true);
         nivel6.add(boss);
 
@@ -96,7 +96,7 @@ public class Nivel6 extends JFrame {
 
         movBoss();
 
-        time = new Timer(10, e -> movBoss());
+        time = new Timer(30, e -> movBoss());
         time.stop();
         timejogo = new Timer(20, e -> update());
         timejogo.start();
@@ -266,7 +266,7 @@ public class Nivel6 extends JFrame {
                 player.setLocation(player.getX(), plataforma4.getY() - player.getHeight());
                 pX = 100;
                 pY = 100;
-                boss.setVisible(false);
+                boss.setVisible(true);
                 time.start();
                 player.setLocation(50, 580);
                 plataforma1.setBounds(0, 610, 1000, 40);
@@ -293,5 +293,5 @@ public class Nivel6 extends JFrame {
             velocidade = -10;
         }
     }
-
+//verificar 
 }

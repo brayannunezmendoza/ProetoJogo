@@ -27,8 +27,8 @@ public class Main {
     public static void main(String[] args) {
 
         //new EscolhaAcesso(); //0
-        //new EscolhaNivel();   //0
-        new Nivel1();         //definic cor dos label troca de tela
+        new EscolhaNivel();   //0
+        //new Nivel1();         //definic cor dos label troca de tela
         //new Nivel2(); //definic cor label troca de tela
         //new Nivel3();   //definic cor label troca de tela
         // new Nivel4();
