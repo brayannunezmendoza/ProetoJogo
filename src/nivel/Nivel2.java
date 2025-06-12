@@ -62,7 +62,7 @@ public class Nivel2 extends JFrame {
         nivel4.setLayout(null);
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
         nivel4.setVisible(true);
-        time = new Timer(0, e -> atualização());
+        time = new Timer(20, e -> atualização());
         time.start();
     }
 

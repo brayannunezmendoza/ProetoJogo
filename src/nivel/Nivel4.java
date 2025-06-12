@@ -17,7 +17,7 @@ import nivel.gerenciadorNivel;
  * @author braya
  */
 public class Nivel4 extends JFrame {
-
+    
     private JLabel fundo;
     private Timer time;
     private JFrame nivel4;
@@ -32,12 +32,12 @@ public class Nivel4 extends JFrame {
     private int velocidade;
     private int fy = 1000;
     private int novoX, novoY;
-
+    
     public Nivel4() {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
-
+        
         nivel4 = new JFrame("nivel4");
         player = new Player("/res/boneco.png", pX, pY);
         player.setBackground(Color.red);
@@ -45,23 +45,23 @@ public class Nivel4 extends JFrame {
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
         nivel4.add(player);
         carregarLabels();
-
+        
         nivel4.add(fundo);
         nivel4.setBackground(Color.BLACK);
         nivel4.setSize(1600, 900);
         nivel4.setLayout(null);
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
         nivel4.setVisible(true);
-        time = new Timer(0, e -> atualização());
+        time = new Timer(20, e -> atualização());
         time.start();
     }
-
+    
     public void carregarLabels() {
         nivel4.add(lblP1);//piso 1
         nivel4.add(lblP2);  //piso movel 
         nivel4.add(lblP3);  //piso 2
         nivel4.add(lblP4);   //armadilha 1
-         nivel4.add(lblP5);
+        nivel4.add(lblP5);
         //  nivel4.add(lblP6);
         nivel4.add(lblP7);  //piso apoio 3
         nivel4.add(lblP8); //platafoma 4
@@ -70,26 +70,28 @@ public class Nivel4 extends JFrame {
         lblP1.setBounds(0, 800, 400, 30);
         lblP2.setBounds(400, 800, 400, 30);
         lblP3.setBounds(1000, 800, 400, 30);
-        lblP4.setBounds(400, 125, 400, 30);
+        lblP4.setBounds(420, 125, 400, 20);
         lblP5.setBounds(1550, 50, 50, 50);  //aradilha 2
         lblP5.setBackground(Color.green);
 
         // lblP6.setLocation(300, 400);
-        lblP7.setLocation(450, 100);
+        lblP7.setBounds(30, 100, 400, 40);
+        lblP7.setLocation(400, 100);
         lblP8.setLocation(0, 250);
-        lblP9.setLocation(1300, 100);
-
+        lblP9.setBounds(1200, 100, 400, 30);
+        lblP9.setLocation(1200, 100);
+        
     }
-
+    
     public void moverPlat() {
-
+        
         lblP2.setLocation(400, lblP2.getY() - 3);
         if (lblP2.getY() <= 0) {
             lblP2.setLocation(400, 900);
         }
-
+        
     }
-
+    
     private void atualização() {
         moverPlat();
         mover();
@@ -102,13 +104,13 @@ public class Nivel4 extends JFrame {
         repaint();
         barreira();
     }
-
+    
     public void pontoSpanw() {
         pY = 700;
         pX = 1;
         player.setLocation(pX, pY);
     }
-
+    
     private void barreira() {
         if (player.getY() >= 900) {
             velocidade = 0;
@@ -119,7 +121,7 @@ public class Nivel4 extends JFrame {
             novoX = 0;
         }
     }
-
+    
     public void mover() {
         nivel4.addKeyListener(new KeyAdapter() {
             @Override
@@ -137,7 +139,7 @@ public class Nivel4 extends JFrame {
                     caindo = false;
                 }
             }
-
+            
             @Override
             public void keyReleased(KeyEvent e) {
                 int tecla = e.getKeyCode();
@@ -149,9 +151,9 @@ public class Nivel4 extends JFrame {
                 }
             }
         });
-
+        
     }
-
+    
     public void pulando() {
         if (pulando == true) {
             pY -= velocidade;
@@ -160,15 +162,15 @@ public class Nivel4 extends JFrame {
         if (pY >= fy) {
             velocidade = 0;
         }
-
+        
     }
-
+    
     public void novaPos() {
         velocidade = 0;
         pulando = false;
         caindo = true;
     }
-
+    
     public void colbaixo() {
         if (player.getBounds().intersects(lblP1.getBounds())) {
             velocidade = -10;
@@ -179,7 +181,7 @@ public class Nivel4 extends JFrame {
         if (player.getBounds().intersects(lblP3.getBounds())) {
             velocidade = -10;
         }
-
+        
         if (player.getBounds().intersects(lblP5.getBounds())) {
             velocidade = -5;
         }
@@ -199,7 +201,7 @@ public class Nivel4 extends JFrame {
             velocidade = -10;
         }
     }
-
+    
     public void colisao() {
         if (player.getBounds().intersects(lblP1.getBounds())) {
             if (player.getY() + player.getHeight() - 10 <= lblP1.getY() + 20) {
@@ -211,10 +213,10 @@ public class Nivel4 extends JFrame {
             if (player.getY() + player.getHeight() <= lblP2.getY() + 20) {
                 player.setLocation(player.getX(), lblP2.getY() - player.getHeight());
                 novaPos();
-
+                
             }
         }
-
+        
         if (player.getBounds().intersects(lblP3.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP3.getY() + 20) {
                 player.setLocation(player.getX(), lblP3.getY() - player.getHeight());
@@ -222,9 +224,9 @@ public class Nivel4 extends JFrame {
             }
         }
         if (player.getBounds().intersects(lblP4.getBounds())) {
-
+            
             pontoSpanw();
-
+            
         }
         if (player.getBounds().intersects(lblP5.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP5.getY() + 20) {
@@ -267,5 +269,5 @@ public class Nivel4 extends JFrame {
             pulando = true;
         }
     }
-
+    
 }

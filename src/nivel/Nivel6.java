@@ -98,7 +98,7 @@ public class Nivel6 extends JFrame {
 
         time = new Timer(10, e -> movBoss());
         time.stop();
-        timejogo = new Timer(0, e -> update());
+        timejogo = new Timer(20, e -> update());
         timejogo.start();
         //time.stop();
         //boss.setSize(500, 500);
