@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package nivel;
 
 import entidades.Player;
+import game.EscolhaNivel;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
@@ -49,16 +47,16 @@ public class Nivel3 extends JFrame {
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
 
-        nivel4 = new JFrame("nivel4");
+        nivel4 = new JFrame("ARLOT - Nivel 3");
         player = new Player("/res/boneco.png", pX, pY);
-        player.setBackground(Color.red);
         nivel4.add(player);
+
         carregarLabels();
 
         nivel4.add(fundo);
-        nivel4.setBackground(Color.BLACK);
         nivel4.setSize(1600, 900);
         nivel4.setLayout(null);
+        nivel4.setResizable(false);
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
         nivel4.setVisible(true);
         time = new Timer(20, e -> atualização());
@@ -77,31 +75,30 @@ public class Nivel3 extends JFrame {
         nivel4.add(lblP8);
         nivel4.add(lblP9);
         nivel4.add(lblP10);
-        lblP1.setBounds(0, 250, 1400, 40);     //platafroma de cima
+        lblP1.setBounds(0, 250, 1400, 40);//platafroma de cima
         lblP1.setBackground(Color.blue);
-        lblP2.setBounds(300, 600, 1300, 40);    //platafroma de cima
-        lblP3.setBounds(0, 800, 1600, 40);    //platafroma de cima
+        lblP2.setBounds(300, 600, 1300, 40);//platafroma de cima
+        lblP3.setBounds(0, 800, 1600, 40);//platafroma de cima
         lblP3.setBackground(Color.BLUE);
-        lblP4.setBounds(1550, 400, 40, 200);    //armadilha de lado
-        lblP5.setLocation(1000, 450);   //miniplataforma
-        lblP6.setLocation(300, 400);     //miniplataforma2
-        lblP7.setBounds(600, 550, 50, 50);    //bixo
-        lblP8.setBounds(1200, 550, 50, 50); //bixo
-        lblP9.setBounds(1550, 750, 50, 50);   //chegar
+        lblP4.setBounds(1550, 400, 40, 200);//armadilha de lado
+        lblP5.setLocation(1000, 450);//miniplataforma
+        lblP6.setLocation(300, 400); //miniplataforma2
+        lblP7.setBounds(600, 550, 50, 50);//bixo
+        lblP8.setBounds(1200, 550, 50, 50);//bixo
+        lblP9.setBounds(1550, 750, 50, 50);//chegar
         lblP9.setBackground(Color.green);
-        lblP10.setBackground(Color.red);    //armadilha
-
+        lblP10.setBackground(Color.red);//armadilha
     }
 
     public void moveBixin() {
-
-        if (lblP8.getX()>=1500) {
+        if (lblP8.getX() >= 1500) {
             tem = -3;
-
-        }if(lblP7.getX()<=300){tem=3;}
+        }
+        if (lblP7.getX() <= 300) {
+            tem = 3;
+        }
         lblP7.setLocation(lblP7.getX() + tem, 550);
         lblP8.setLocation(lblP8.getX() + tem, 550);
-
     }
 
     private void atualização() {
@@ -124,7 +121,6 @@ public class Nivel3 extends JFrame {
         player.setLocation(pX, pY);
         mortes += 1;
         placar.setText("Mortes: " + mortes);
-
     }
 
     private void barreira() {
@@ -177,7 +173,6 @@ public class Nivel3 extends JFrame {
         if (pY >= fy) {
             velocidade = 0;
         }
-
     }
 
     public void novaPos() {
@@ -196,7 +191,6 @@ public class Nivel3 extends JFrame {
         if (player.getBounds().intersects(lblP3.getBounds())) {
             velocidade = -10;
         }
-
         if (player.getBounds().intersects(lblP5.getBounds())) {
             velocidade = -5;
         }
@@ -255,12 +249,11 @@ public class Nivel3 extends JFrame {
             pontoSpanw();
         }
         if (player.getBounds().intersects(lblP9.getBounds())) {
-
             JOptionPane.showMessageDialog(null, "Passou");
-           mortes=-1;
+            mortes = -1;
             pontoSpanw();
-
-            //voltar ao selecao de niveis
+            nivel4.dispose();
+            new EscolhaNivel();
         }
         if (player.getBounds().intersects(lblP10.getBounds())) {
             pontoSpanw();
@@ -268,5 +261,4 @@ public class Nivel3 extends JFrame {
             pulando = true;
         }
     }
-
 }

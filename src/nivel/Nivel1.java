@@ -1,25 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package nivel;
 
 import entidades.Player;
+import game.EscolhaNivel;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.Timer;
-//apagar o temporario no fim
 
 /**
  *
@@ -49,25 +40,25 @@ public class Nivel1 extends JFrame {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo1.jpeg")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
-        nivel4 = new JFrame("nivel4");
+
+        nivel4 = new JFrame("ARLOT - Nivel 1");
         player = new Player("/res/boneco.png", pX, pY);
         player.setBackground(Color.red);
         nivel4.add(player);
+
         placar = new JLabel("Mortes: " + mortes);
         placar.setFont(new Font("Arial", Font.BOLD, 35));
-
         placar.setBounds(1400, 0, 200, 100);
-
         placar.setVisible(true);
         nivel4.add(placar);
 
         carregarLabels();
 
         nivel4.add(fundo);
-        nivel4.setBackground(Color.BLACK);
         nivel4.setSize(1600, 900);
         nivel4.setLayout(null);
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        nivel4.setResizable(false);
         nivel4.setVisible(true);
         time = new Timer(15, e -> atualização());
         time.start();
@@ -80,7 +71,7 @@ public class Nivel1 extends JFrame {
         lblP2.setLocation(700, 700);
         lblP3.setLocation(1300, 600);
         lblP4.setBounds(1550, 400, 40, 200);
-        lblP5.setLocation(1000, 500);
+        lblP5.setLocation(1000, 400);
         lblP6.setLocation(300, 400);
         lblP7.setLocation(500, 100);
         lblP8.setLocation(0, 250);
@@ -114,7 +105,6 @@ public class Nivel1 extends JFrame {
         pY += novoY;
         player.setLocation(pX, pY);
         colisao();
-
         barreira();
         repaint();
     }
@@ -132,7 +122,6 @@ public class Nivel1 extends JFrame {
             pX = 10;
             mortes += 1;
             placar.setText("Mortes: " + mortes);
-
         }
         if (player.getX() >= 1540 || player.getX() <= 10) {
             novoX = 0;
@@ -179,7 +168,6 @@ public class Nivel1 extends JFrame {
         if (pY >= fy) {
             velocidade = 0;
         }
-
     }
 
     public void novaPos() {
@@ -198,7 +186,6 @@ public class Nivel1 extends JFrame {
         if (player.getBounds().intersects(lblP3.getBounds())) {
             velocidade = -10;
         }
-
         if (player.getBounds().intersects(lblP5.getBounds())) {
             velocidade = -5;
         }
@@ -290,18 +277,10 @@ public class Nivel1 extends JFrame {
                                                 Passou
                                                 depois de: """ + mortes + " mortes");
             pontoSpanw();
-          
-            ////dispose nivel
-            ///add Jframe escolha niveis
-        }
-        
-        else {
+            nivel4.dispose();
+            new EscolhaNivel();
+        } else {
             pulando = true;
         }
     }
-
-    public void contador() {
-
-    }
-
 }

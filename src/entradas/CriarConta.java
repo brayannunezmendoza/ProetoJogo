@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package entradas;
 
 /**
@@ -24,7 +21,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import model.JogadorSql;
 
-public class CriarConta {
+public class CriarConta extends JFrame{
 
     private JogadorSql jogadorSql;
     private JFrame telaCadastro;                //
@@ -53,7 +50,7 @@ public class CriarConta {
 
     //contrutor
     public CriarConta() {
-        telaCadastro = new JFrame();
+        telaCadastro = new JFrame("ARLOT - Cadastrar-se");
         fundo = new JLabel();
         lbl_nomeJogo = new JLabel("Arlot");
         p = new JPanel();
@@ -87,6 +84,7 @@ public class CriarConta {
 
         //configurando a tela
         telaCadastro.setSize(1600, 900);
+        telaCadastro.setDefaultCloseOperation(EXIT_ON_CLOSE);
         telaCadastro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         telaCadastro.setLocationRelativeTo(null);
         telaCadastro.setLayout(null);
@@ -223,16 +221,14 @@ public class CriarConta {
                         if (!txt_gmail.getText().isEmpty()) {
                             if (!txt_celular.getText().isEmpty()) {
                                 if (!txt_username.getText().isEmpty()) {
-                                    if (!txt_senha.getText().isEmpty() /*&& txt_senhaConfirmar.getText().equals(txt_senha)*/) {
-                                        System.out.println("ok");
-
+                                    if (!txt_senha.getText().isEmpty() && txt_senhaConfirmar.getText().equals(txt_senha.getText())) {
                                         JogadorSqlDAO dao = new JogadorSqlDAO();
-
                                         jogadorSql = new JogadorSql(txt_nome.getText(), txt_gmail.getText(), txt_celular.getText(), txt_username.getText(), txt_senha.getText());
                                         dao.cadastrarJogador(jogadorSql);
-
+                                        new Entrar();
+                                        telaCadastro.dispose();
                                     } else {
-                                        JOptionPane.showMessageDialog(null, "O campo Seha não pode estar vazio");
+                                        JOptionPane.showMessageDialog(null, "O campo da esta esta incompleto ou incorreto");
                                     }
                                 } else {
                                     JOptionPane.showMessageDialog(null, "O campo Nome não pode estar vazio");

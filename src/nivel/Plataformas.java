@@ -129,7 +129,7 @@ public class Plataformas {
         lblPlataforma7.setOpaque(true);
         lblPlataforma7.setVisible(true);
 
-        lblPlataforma8.setBackground(Color.black);
+        lblPlataforma8.setBackground(Color.red);
         lblPlataforma8.setSize(pw, ph);
         lblPlataforma8.setOpaque(true);
         lblPlataforma8.setVisible(true);

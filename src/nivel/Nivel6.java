@@ -2,6 +2,10 @@ package nivel;
 
 import entidades.Player;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Random;
@@ -27,6 +31,12 @@ public class Nivel6 extends JFrame {
     private boolean movBossX = true;
     private Timer time;
     private Timer timejogo;
+    private int mortes=0;
+    private JLabel projBoss;
+    private boolean projAtivo = false;
+    private int projX, projY;
+    private boolean entrouNaSalaDoBoss = false;
+    private JLabel placar;
 
     private int pX = 100, pY = 100;
     private boolean pulando = false;
@@ -38,13 +48,20 @@ public class Nivel6 extends JFrame {
     int ran;
     boolean teste = false;
     boolean tiro = false;
-    int perigoX = 1000;
     int perigoY = -50;
+    int perigoX = 1000;
 
     public Nivel6() {
         nivel6 = new JFrame("ARLOT - Boss");
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo6.jpg")));
         perigo = new JLabel();
+       
+        placar = new JLabel("Mortes: " + mortes);
+        placar.setBounds(1400, 0, 200, 100);
+        placar.setForeground(Color.white);
+        placar.setFont(new Font("Arial", Font.BOLD, 35));
+        placar.setVisible(true);
+         nivel6.add(placar);
 
         plataforma1 = new JLabel();
         plataforma2 = new JLabel();
@@ -55,6 +72,7 @@ public class Nivel6 extends JFrame {
         player.setBackground(Color.red);
         nivel6.add(player);
 
+        nivel6.setResizable(false);
         nivel6.setBounds(0, 0, 1600, 900);
         nivel6.setLocationRelativeTo(null);
         nivel6.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -67,6 +85,13 @@ public class Nivel6 extends JFrame {
         boss.setOpaque(false);
         boss.setVisible(true);
         nivel6.add(boss);
+
+        projBoss = new JLabel();
+        projBoss.setBounds(0, 0, 30, 10);
+        projBoss.setBackground(Color.orange);
+        projBoss.setOpaque(true);
+        projBoss.setVisible(false); // Começa invisível
+        nivel6.add(projBoss);
 
         perigo.setBounds(perigoX, perigoY, 1600, 20);
         perigo.setBackground(Color.red);
@@ -94,6 +119,20 @@ public class Nivel6 extends JFrame {
         nivel6.add(fundo);
         nivel6.setVisible(true);
 
+        Timer tiroBoss = new Timer(20, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (projAtivo) {
+                    projX -= 10; // Move da esquerda pra direita
+                    projBoss.setLocation(projX, projY);
+                    if (projX < 0) {
+                        projBoss.setVisible(false);
+                        projAtivo = false;
+                    }
+                }
+            }
+        });
+        tiroBoss.start();
+
         movBoss();
 
         time = new Timer(30, e -> movBoss());
@@ -106,12 +145,34 @@ public class Nivel6 extends JFrame {
 
     }
 
+    public void pontoSpanw() {
+        pY = 100;
+        pX = 100;
+        player.setLocation(pX, pY);
+        mortes += 1;
+        placar.setText("Mortes: " + mortes);
+    }
+
+    
+    public void fim(){
+    if (mortes>=5){
+        entrouNaSalaDoBoss=false;
+        nivel6.dispose();
+        System.exit(mortes);
+        
+    }
+    
+    }
     private void update() {
-        ran = random.nextInt(1, 9);
+        fim();
+        ran = random.nextInt(1, 3);
         perigoX -= 10;
         perigo.setLocation(perigoX, perigoY);
 
-        atac();
+        if (entrouNaSalaDoBoss && boss.isVisible() && ran == 2) {
+            dispararDoBoss();
+        }
+
         //movBoss();
         pX += novoX;
         pY += novoY;
@@ -126,27 +187,7 @@ public class Nivel6 extends JFrame {
 
     }
 
-    public void atac() {
-        if (tiro == true) {
-        }
-
-        if (ran == 4) {
-
-            teste = true;
-        }
-        if (teste == true) {
-
-        }
-        if (perigoX == -100) {
-
-        }
-
-    }
-
-    public void pisos() {
-
-    }
-
+  
     public void movBoss() {
         if (movBoss == true) {
             by += 3;
@@ -183,8 +224,7 @@ public class Nivel6 extends JFrame {
     private void barreira() {
         if (player.getY() >= 900) {
             velocidade = 0;
-            pY = 100;
-            pX = 100;
+            pontoSpanw();
         }
         if (player.getX() >= 1540 || player.getX() <= 10) {
             novoX = 0;
@@ -240,7 +280,21 @@ public class Nivel6 extends JFrame {
         caindo = true;
     }
 
+    private void dispararDoBoss() {
+        if (!projAtivo) {
+            projX = boss.getX() + boss.getWidth(); // Início do tiro no lado direito do boss
+            projY = boss.getY() + boss.getHeight() / 2;
+            projBoss.setLocation(projX, projY);
+            projBoss.setVisible(true);
+            projAtivo = true;
+        }
+    }
+
     private void colisao() {
+
+        if (player.getBounds().intersects(new Rectangle(projX, projY, projBoss.getWidth(), projBoss.getHeight()))) {
+            pontoSpanw(); // Executa a ação quando colide
+        }
 
         if (player.getBounds().intersects(plataforma1.getBounds())) {
             if (player.getY() + player.getHeight() - 10 <= plataforma1.getY() + 20) {
@@ -269,11 +323,13 @@ public class Nivel6 extends JFrame {
                 boss.setVisible(true);
                 time.start();
                 player.setLocation(50, 580);
-                plataforma1.setBounds(0, 610, 1000, 40);
+                plataforma1.setBounds(0, 450, 1000, 40);
                 plataforma2.setLocation(0, -200);
                 plataforma3.setLocation(0, -200);
                 plataforma4.setLocation(0, -200);
-              perigo.setLocation(perigoX, 500);
+                perigo.setLocation(perigoX, 500);
+                entrouNaSalaDoBoss = true;
+                boss.setVisible(true);
 
 //novaPos();
             }

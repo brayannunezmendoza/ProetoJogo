@@ -1,4 +1,4 @@
-/*
+   /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -11,7 +11,7 @@ package entradas;
 import DAO.PlayerDAO;
 import DTO.JogadorDTO;
 import game.EscolhaNivel;
-import game.Tela;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -40,20 +40,15 @@ public class Entrar extends JFrame {
     private JButton btn_entrar;         //
     //
 
-    private ImageIcon img_image1;       //
-    //imagem
-    private ImageIcon img_imagem;       //
-    private JLabel lbl_fundo;           //
+    private ImageIcon img_imagem;       
+    private JLabel lbl_fundo;           
 
-    //dados do jogador
     private String email = "123";
     private String senha = "123";
-    // private String email;
-    //private String senha;
 
     public Entrar() {
         //instanciando objetos
-        login = new JFrame();
+        login = new JFrame("ARLOT - Entrar");
         login.setLayout(null);
         lbl_fundo = new JLabel();
         lbl_email = new JLabel();
@@ -66,6 +61,7 @@ public class Entrar extends JFrame {
         //configurando o containe frame
         login.setSize(1600, 900);
         login.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        login.setResizable(false);
         login.setLocationRelativeTo(null);
         login.setResizable(false);
         //lbl

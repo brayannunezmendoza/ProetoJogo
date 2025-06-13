@@ -30,8 +30,8 @@ public class PlayerDAO {
             String sql = "SELECT  * FROM tabelaplayer WHERE EMAIL = ?  AND SENHA =?";
 
             PreparedStatement psmt = conn.prepareStatement(sql);
-            psmt.setString(2, jogadorDTO.getEmail());
-            psmt.setString(1, jogadorDTO.getSenha());
+            psmt.setString(1, jogadorDTO.getEmail());
+            psmt.setString(2, jogadorDTO.getSenha());
             ResultSet rs = psmt.executeQuery();
             return rs;
 

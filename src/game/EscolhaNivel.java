@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package game;
 
+package game;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
-import game.TelaFrame;
-import nivel.gerenciadorNivel;
 
 public class EscolhaNivel  {
 
@@ -42,6 +36,7 @@ public class EscolhaNivel  {
         janela.setSize(1600, 900);
         janela.setLocationRelativeTo(null);
         janela.setDefaultCloseOperation(1);
+        janela.setResizable(false);
         escolhas();
         fundo();
         janela.setVisible(true);
@@ -62,11 +57,11 @@ public class EscolhaNivel  {
     }
 
     public void escolhas() {
-        escolha1 = new JLabel("Nivel 1 Bloquedo");
-        escolha2 = new JLabel("Nivel 2 Bloquedo");
-        escolha3 = new JLabel("Nivel 3 Bloquedo");
-        escolha4 = new JLabel("Nivel 4 Bloquedo");
-        escolha5 = new JLabel("Nivel 5 Bloquedo");
+        escolha1 = new JLabel("Nivel 1 ");
+        escolha2 = new JLabel("Nivel 2 ");
+        escolha3 = new JLabel("Nivel 3 ");
+        escolha4 = new JLabel("Nivel 4 ");
+        escolha5 = new JLabel("Nivel 5 ");
         escolha6 = new JLabel("Nivel 6 Bloquedo");
        
 
@@ -124,8 +119,6 @@ public class EscolhaNivel  {
         janela.add(escolha4);
         janela.add(escolha5);
         janela.add(escolha6);
-
-        
         clique();
     }  
 
@@ -172,6 +165,7 @@ public class EscolhaNivel  {
         });
         escolha6.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null, "Disponivel na proxima atualização");
               
             }
         });

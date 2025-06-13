@@ -2,22 +2,22 @@ package nivel;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import nivel.Plataformas;
 import entidades.Player;
+import game.EscolhaNivel;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import nivel.gerenciadorNivel;
 
 /**
  *
  * @author braya
  */
 public class Nivel4 extends JFrame {
-    
+
     private JLabel fundo;
     private Timer time;
     private JFrame nivel4;
@@ -32,22 +32,28 @@ public class Nivel4 extends JFrame {
     private int velocidade;
     private int fy = 1000;
     private int novoX, novoY;
-    
+    private JLabel placar;
+    private int mortes = 0;
+
     public Nivel4() {
         fundo = new JLabel(new ImageIcon(getClass().getResource("/res/fundo4.png")));
         fundo.setBounds(0, 0, 1600, 900);
         fundo.setVisible(true);
-        
-        nivel4 = new JFrame("nivel4");
+        placar = new JLabel("Mortes: " + mortes);
+        placar.setBounds(1400, 200, 200, 100);
+        placar.setForeground(Color.white);
+        placar.setFont(new Font("Arial", Font.BOLD, 35));
+        placar.setVisible(true);
+
+        nivel4 = new JFrame("ARLOT - Nivel 4");
         player = new Player("/res/boneco.png", pX, pY);
         player.setBackground(Color.red);
         nivel4.setResizable(false);
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
         nivel4.add(player);
         carregarLabels();
-        
+
         nivel4.add(fundo);
-        nivel4.setBackground(Color.BLACK);
         nivel4.setSize(1600, 900);
         nivel4.setLayout(null);
         nivel4.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,14 +61,15 @@ public class Nivel4 extends JFrame {
         time = new Timer(20, e -> atualização());
         time.start();
     }
-    
+
     public void carregarLabels() {
+        nivel4.add(placar);
         nivel4.add(lblP1);//piso 1
         nivel4.add(lblP2);  //piso movel 
         nivel4.add(lblP3);  //piso 2
         nivel4.add(lblP4);   //armadilha 1
         nivel4.add(lblP5);
-        //  nivel4.add(lblP6);
+        nivel4.add(lblP6);
         nivel4.add(lblP7);  //piso apoio 3
         nivel4.add(lblP8); //platafoma 4
         nivel4.add(lblP9); //plataforma final
@@ -71,7 +78,7 @@ public class Nivel4 extends JFrame {
         lblP2.setBounds(400, 800, 400, 30);
         lblP3.setBounds(1000, 800, 400, 30);
         lblP4.setBounds(420, 125, 400, 20);
-        lblP5.setBounds(1550, 50, 50, 50);  //aradilha 2
+        lblP5.setBounds(1550, 50, 50, 50);
         lblP5.setBackground(Color.green);
 
         // lblP6.setLocation(300, 400);
@@ -80,18 +87,18 @@ public class Nivel4 extends JFrame {
         lblP8.setLocation(0, 250);
         lblP9.setBounds(1200, 100, 400, 30);
         lblP9.setLocation(1200, 100);
-        
+
     }
-    
+
     public void moverPlat() {
-        
+
         lblP2.setLocation(400, lblP2.getY() - 3);
         if (lblP2.getY() <= 0) {
             lblP2.setLocation(400, 900);
         }
-        
+
     }
-    
+
     private void atualização() {
         moverPlat();
         mover();
@@ -104,24 +111,28 @@ public class Nivel4 extends JFrame {
         repaint();
         barreira();
     }
-    
+
     public void pontoSpanw() {
         pY = 700;
         pX = 1;
         player.setLocation(pX, pY);
+        mortes+=1;
+        placar.setText("Mortes: "+ mortes);
+        
+        
     }
-    
+
     private void barreira() {
         if (player.getY() >= 900) {
             velocidade = 0;
-            pY = 700;
-            pX = 10;
+            pontoSpanw();
+            
         }
         if (player.getX() >= 1540 || player.getX() <= 10) {
             novoX = 0;
         }
     }
-    
+
     public void mover() {
         nivel4.addKeyListener(new KeyAdapter() {
             @Override
@@ -139,7 +150,7 @@ public class Nivel4 extends JFrame {
                     caindo = false;
                 }
             }
-            
+
             @Override
             public void keyReleased(KeyEvent e) {
                 int tecla = e.getKeyCode();
@@ -151,9 +162,9 @@ public class Nivel4 extends JFrame {
                 }
             }
         });
-        
+
     }
-    
+
     public void pulando() {
         if (pulando == true) {
             pY -= velocidade;
@@ -162,29 +173,29 @@ public class Nivel4 extends JFrame {
         if (pY >= fy) {
             velocidade = 0;
         }
-        
+
     }
-    
+
     public void novaPos() {
         velocidade = 0;
         pulando = false;
         caindo = true;
+
     }
-    
+
     public void colbaixo() {
-        if (player.getBounds().intersects(lblP1.getBounds())) {
-            velocidade = -10;
-        }
+
         if (player.getBounds().intersects(lblP2.getBounds())) {
             velocidade = 4;
         }
         if (player.getBounds().intersects(lblP3.getBounds())) {
             velocidade = -10;
-        }
-        
-        if (player.getBounds().intersects(lblP5.getBounds())) {
-            velocidade = -5;
-        }
+        } if (player.getBounds().intersects(lblP4.getBounds())) {
+            velocidade = -10;
+            
+        } 
+
+
         if (player.getBounds().intersects(lblP6.getBounds())) {
             velocidade = -10;
         }
@@ -201,7 +212,7 @@ public class Nivel4 extends JFrame {
             velocidade = -10;
         }
     }
-    
+
     public void colisao() {
         if (player.getBounds().intersects(lblP1.getBounds())) {
             if (player.getY() + player.getHeight() - 10 <= lblP1.getY() + 20) {
@@ -213,10 +224,10 @@ public class Nivel4 extends JFrame {
             if (player.getY() + player.getHeight() <= lblP2.getY() + 20) {
                 player.setLocation(player.getX(), lblP2.getY() - player.getHeight());
                 novaPos();
-                
+
             }
         }
-        
+
         if (player.getBounds().intersects(lblP3.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP3.getY() + 20) {
                 player.setLocation(player.getX(), lblP3.getY() - player.getHeight());
@@ -224,22 +235,21 @@ public class Nivel4 extends JFrame {
             }
         }
         if (player.getBounds().intersects(lblP4.getBounds())) {
-            
             pontoSpanw();
-            
+            mortes+=1;
+
         }
         if (player.getBounds().intersects(lblP5.getBounds())) {
-            if (player.getY() + player.getHeight() <= lblP5.getY() + 20) {
-                player.setLocation(player.getX(), lblP5.getY() - player.getHeight());
-                novaPos();
-            } else {
-            }
+            JOptionPane.showMessageDialog(null, "Passou");
+            //mortes = -1;
+            pontoSpanw();
+            nivel4.dispose();
+            new EscolhaNivel();
         }
         if (player.getBounds().intersects(lblP6.getBounds())) {
             if (player.getY() + player.getHeight() <= lblP6.getY() + 20) {
                 player.setLocation(player.getX(), lblP6.getY() - player.getHeight());
                 novaPos();
-            } else {
             }
         }
         if (player.getBounds().intersects(lblP7.getBounds())) {
@@ -269,5 +279,5 @@ public class Nivel4 extends JFrame {
             pulando = true;
         }
     }
-    
+
 }
