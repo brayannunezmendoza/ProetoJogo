@@ -167,7 +167,7 @@ public class Nivel6 extends JFrame {
         fim();
         ran = random.nextInt(1, 3);
         perigoX -= 10;
-        perigo.setLocation(perigoX, perigoY);
+        perigo.setLocation(perigoX, perigoY);   
 
         if (entrouNaSalaDoBoss && boss.isVisible() && ran == 2) {
             dispararDoBoss();
