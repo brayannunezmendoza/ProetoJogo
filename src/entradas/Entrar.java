@@ -8,6 +8,9 @@ package entradas;
  *
  * @author braya
  */
+import DAO.PlayerDAO;
+import DTO.JogadorDTO;
+import game.EscolhaNivel;
 import game.Tela;
 import java.awt.Color;
 import java.awt.Font;
@@ -20,6 +23,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class Entrar extends JFrame {
 
@@ -31,7 +36,7 @@ public class Entrar extends JFrame {
     private JLabel lbl_senha;           //
     //
     private JTextField txt_email;       //
-    private JPasswordField psw_senha;   //
+    private JTextField psw_senha;   //
     private JButton btn_entrar;         //
     //
 
@@ -142,80 +147,33 @@ public class Entrar extends JFrame {
         btn_entrar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String senhatxt = new String(psw_senha.getText());
-                String emailtxt = new String(txt_email.getText());
-                if (senha.equals(senhatxt) && email.equals(emailtxt)) {
-                    JOptionPane.showMessageDialog(null, "acesso permitido");
+               
+                try {
+                    String email_player, senha_player;
+                    email_player = txt_email.getText();
+                    senha_player = psw_senha.getText();
 
-                    login.dispose();
-                    new Tela();
-                    login.dispose();
+                    JogadorDTO objDTO = new JogadorDTO();
+                    objDTO.setEmail(email_player);
+                    objDTO.setSenha(senha_player);
 
-                } else {
-                  /*  JOptionPane.showMessageDialog(null, """
-                                                          Senha ou email incorretos
-                                                          Tente novamente
-                                                          """);*/
+                    PlayerDAO objdao = new PlayerDAO();
+                    ResultSet rsplayerdao = objdao.autenticacao(objDTO);
 
+                    if (rsplayerdao.next()) {
+                        System.out.println("Abrir trla");
+                        login.dispose();
+                        new EscolhaNivel();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "credenciais erradas");
+                        System.out.println("erro entrar");
+                    }
+
+                } catch (SQLException ex) {
+                    System.getLogger(Entrar.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
                 }
-            }
-        }
-        );
-    }
-
-    public void verificação() {
-
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    /* public void confirmardado(String ema, String senh){
-        if (ema==getEmail()){
-            System.out.println("condfirm");
-        }
- 
-    }*/
- /*
-    public void inputDados() {
-        btn_entrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-                
-             
-                
-                //email = txt_email.getText();
-                //senha = psw_senha.getText();
-                //System.out.println(email);
-                //System.out.println(senha);
-                //fazer confirma??o de senha e email com o banco de dados
-               // if ("123" == txt_email.getText()) {
-                 //   JOptionPane.showMessageDialog(null, "acesso permitido");
-                //}
-               // System.out.println(txt_email.getText());
-               // System.out.println(psw_senha.getText());
 
             }
-        }
-        );
-    }
 
-     */
-
-///Adicionar banco de dados
-            ///banco de dados ira verificar se existem dados relacionados e se s?o iguais
-            ///depois de confirmar deve dar um Entrar.setvisble=false e um dispose
-            ///e depois um selecionarniveis.setvisible= true
-            ///
-            ///
-            ///extra adicionar o comando enter para ser igual ao botao
-            ///
-        
-    
-}
+        });
+    }}

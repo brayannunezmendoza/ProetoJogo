@@ -8,6 +8,7 @@ package entradas;
  *
  * @author braya
  */
+import DAO.JogadorSqlDAO;
 import java.awt.Color;
 import java.awt.Font;
 import static java.awt.Frame.NORMAL;
@@ -21,9 +22,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import model.JogadorSql;
 
 public class CriarConta {
 
+    private JogadorSql jogadorSql;
     private JFrame telaCadastro;                //
     private JLabel fundo;
 
@@ -47,13 +50,6 @@ public class CriarConta {
     //atributos btn
     private JButton btn_Cadastrar;
     private JPanel p;
-
-    String nome;
-    String email;
-    String celular;
-    String username;
-    String senha;
-    String confirmarSenha;
 
     //contrutor
     public CriarConta() {
@@ -219,45 +215,46 @@ public class CriarConta {
         //visibilidade da janela
         telaCadastro.setVisible(true);
 
-        armazenarDados();
-
-    }
-
-    public void armazenarDados() {
         btn_Cadastrar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                criarConta();
+
+            public void actionPerformed(ActionEvent a) {
+                try {
+                    if (!txt_nome.getText().isEmpty()) {
+                        if (!txt_gmail.getText().isEmpty()) {
+                            if (!txt_celular.getText().isEmpty()) {
+                                if (!txt_username.getText().isEmpty()) {
+                                    if (!txt_senha.getText().isEmpty() /*&& txt_senhaConfirmar.getText().equals(txt_senha)*/) {
+                                        System.out.println("ok");
+
+                                        JogadorSqlDAO dao = new JogadorSqlDAO();
+
+                                        jogadorSql = new JogadorSql(txt_nome.getText(), txt_gmail.getText(), txt_celular.getText(), txt_username.getText(), txt_senha.getText());
+                                        dao.cadastrarJogador(jogadorSql);
+
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "O campo Seha não pode estar vazio");
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "O campo Nome não pode estar vazio");
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "O campo Celular não pode estar vazio");
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "O campo Email não pode estar vazio");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "O campo Nome não pode estar vazio");
+                    }
+                } catch (Exception e) {
+                }
 
             }
 
-        }
-        );
+        });
 
     }
 
-    public void criarConta() {
-        nome = txt_nome.getText();
-        email = txt_gmail.getText();
-        celular = txt_celular.getText();
-        username = txt_username.getText();
-        String senha1 = txt_senha.getText();
-        String confirmarSenha1 = txt_senhaConfirmar.getText();
-        confirmar(senha1, confirmarSenha1);
-
-       
-    }
-
-    public void confirmar(String senha, String confirmar) {
-        this.senha = senha;
-        this.confirmarSenha = confirmar;
-         if (senha != confirmarSenha) {
-            System.out.println(confirmarSenha);
-            System.out.println(senha);
-            JOptionPane.showMessageDialog(null, "Senhas incopativeis");
-        } else {
-            JOptionPane.showMessageDialog(null, nome + "\n" + email + "\n" + celular + "\n" + username + "\n" + senha + "\n" + confirmarSenha);
-        }
-    }
+    
 
 }

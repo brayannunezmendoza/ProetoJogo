@@ -4,6 +4,7 @@
  */
 package main;
 
+import connect.ConnectFactory;
 import entradas.EscolhaAcesso;
 import game.EscolhaNivel;
 import game.GerenciadorArray;
@@ -25,29 +26,10 @@ import nivel.gerenciadorNivel;
 public class Main {
 
     public static void main(String[] args) {
-
-        //new EscolhaAcesso(); //0
-        new EscolhaNivel();   //0
-        //new Nivel1();         //definic cor dos label troca de tela
-        //new Nivel2(); //definic cor label troca de tela
-        //new Nivel3();   //definic cor label troca de tela
-        // new Nivel4();
-        //new Nivel5();////nivel parecido ao nivel1
-        //new Nivel6();
-        //
-        //new TelaFrame();    
-    
-
-/////////////////////////////////
-        ///        new TelaFrame();//setar a posição dos label e do player moeda 
-
-        ///
-        ///
-        ///
-      //new EscolhaAcesso();>new TelaInicial();
-      ///Layout prontos
-      ///new Entrar();
-      ///new CriarConta();
+//new CriarConta();
+        new EscolhaAcesso(); //0
+       // new EscolhaNivel();   //0
+       
     }
     
     

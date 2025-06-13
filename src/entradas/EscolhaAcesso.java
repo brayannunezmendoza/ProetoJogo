@@ -28,7 +28,7 @@ public class EscolhaAcesso extends JFrame {
 
     public EscolhaAcesso() {
         
-
+ 
         setSize(1600, 900);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
